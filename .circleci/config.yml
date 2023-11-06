@@ -48,10 +48,10 @@ jobs:
             # ls -lah
       - node/install-packages:
           pkg-manager: npm
-          override-ci-command: npm install --no-audit
+          override-ci-command: npm run cci:install
       - run:
           name: 'run unit test:cci'
-          command: 'npm run test:cci'
+          command: 'npm run cci:test'
   run_build:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
