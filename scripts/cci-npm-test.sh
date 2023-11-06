@@ -177,5 +177,5 @@ else
 fi
 
 # Run tests in a CI environment without opening a browser window
-npx ng test --project test-results-ui --no-watch --no-progress --code-coverage
+npx ng test --project not-crm --no-watch --no-progress --code-coverage
 # Give feedback
