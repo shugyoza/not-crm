@@ -38,12 +38,12 @@ jobs:
           at: ~/project
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - run:
-          name: 'list env and dir files'
-          command: |
-            env | sort
-            git branch --vv
-            ls -lah
+      # - run: # this is only needed when we have env files in another github repo
+          # name: 'list env and dir files'
+          # command: |
+            # env | sort
+            # git branch --vv
+            # ls -lah
       - node/install-packages:
           pkg-manager: npm
           override-ci-command: npm install --no-audit
