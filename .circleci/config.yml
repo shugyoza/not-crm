@@ -53,7 +53,7 @@ jobs:
             - .
       - run:
           name: 'run unit test:cci'
-          command: 'npm run cci:test'
+          command: 'npm run test'
   run_build:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
