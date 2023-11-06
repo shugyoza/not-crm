@@ -28,14 +28,14 @@ jobs:
           pkg-manager: npm
           override-ci-command: npm install --no-audit
       - persist_to_workspace:
-          root: ~/project
+          root: ~/
           paths:
             - .
   run_tests:
     executor: cimg_node_self_hosted_runner
     steps:
       - attach_workspace:
-          at: ~/project
+          at: ~/
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       # - run: # this is only needed when we have env files in another github repo
@@ -54,7 +54,7 @@ jobs:
     executor: cimg_node_self_hosted_runner
     steps:
       - attach_workspace:
-          at: ~/project
+          at: ~/
       - run:
           name: 'run build'
           command: 'npm run build'
