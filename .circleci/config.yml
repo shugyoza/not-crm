@@ -49,6 +49,10 @@ jobs:
       - node/install-packages:
           pkg-manager: npm
           override-ci-command: npm run cci:install
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
       - run:
           name: 'run unit test:cci'
           command: 'npm run cci:test'
