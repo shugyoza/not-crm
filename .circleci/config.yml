@@ -1,0 +1,62 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  browser-tools: circleci/browser-tool@1
+  node: circleci/node@5.1.0
+
+workflows:
+  ci-initialization:
+    jobs:
+      - run_install
+      - run_test
+      - run build
+
+executors:
+  cimg_node_self_hosted_runner:
+    docker:
+      - image: cimg/node:16.20.2-browsers
+    resource_class: small
+
+jobs:
+  run_install:
+    executor: cimg_node_self_hosted_runner
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+          override-ci-command: npm install --no-audit
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+  run_tests:
+    executor: cimg_node_self_hosted_runner
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run:
+          name: 'list env and dir files'
+          command: |
+            env | sort
+            git branch --vv
+            ls -lah
+      - node/install-packages:
+          pkg-manager: npm
+          override-ci-command: npm install --no-audit
+      - run:
+          name: 'run unit test:cci'
+          command: 'npm run test:cci'
+  run_build:
+    executor: cimg_node_self_hosted_runner
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: 'run build'
+          command: 'npm run build'
+      - store_artifacts:
+          path: ./dist
