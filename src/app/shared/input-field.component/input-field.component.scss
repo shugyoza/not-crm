@@ -1,0 +1,9 @@
+* {
+  font-size: min(4rem, max(.875rem, 2vw))
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
