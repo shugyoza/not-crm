@@ -11,7 +11,7 @@ workflows:
     jobs:
       - run_install
       - run_tests
-      - run build
+      - run_build
 
 executors:
   cimg_node_self_hosted_runner:
