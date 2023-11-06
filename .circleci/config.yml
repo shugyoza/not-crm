@@ -42,8 +42,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      # - browser-tools/install-chrome
-      # - browser-tools/install-chromedriver
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - run: # this is only needed when we have env files in another github repo
           name: 'list env and dir files'
           command: |
@@ -57,7 +57,7 @@ jobs:
             - .
       - run:
           name: 'run unit test:cci'
-          command: 'npm run cci:test'
+          command: 'npm run test'
   run_build:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
