@@ -1,0 +1,76 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  browser-tools: circleci/browser-tools@1.4.6
+  node: circleci/node@5.1.0
+
+workflows:
+  ci-initialization:
+    when:
+      or:
+        - equal: [main, << pipeline.git.branch >>]
+        - equal: [release, << pipeline.git.branch >>]
+        - equal: [development, << pipeline.git.branch >>]
+    jobs:
+      - run_install
+      - run_tests:
+          requires:
+            - run_install
+      - run_build:
+          requires:
+            - run_tests
+
+executors:
+  cimg_node_self_hosted_runner:
+    docker:
+      - image: cimg/node:16.20.2-browsers
+    resource_class: small
+
+jobs:
+  run_install:
+    executor: cimg_node_self_hosted_runner
+    working_directory: ~/project
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+          override-ci-command: npm run cci:install
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+  run_tests:
+    executor: cimg_node_self_hosted_runner
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - run: # this is only needed when we have env files in another github repo
+          name: 'list env and dir files'
+          command: |
+            ls -lah
+      - node/install-packages:
+          pkg-manager: npm
+          override-ci-command: npm run cci:install
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+      - run:
+          name: 'run unit test:cci'
+          command: 'npx ng test --project not-crm --no-watch --no-progress --code-coverage'
+  run_build:
+    executor: cimg_node_self_hosted_runner
+    working_directory: ~/project
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: 'run build'
+          command: 'npm run build'
+      - store_artifacts:
+          path: ./dist
