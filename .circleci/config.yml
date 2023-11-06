@@ -57,7 +57,7 @@ jobs:
             - .
       - run:
           name: 'run unit test:cci'
-          command: 'npm run test'
+          command: 'npx ng test --project not-crm --no-watch --no-progress --code-coverage'
   run_build:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
