@@ -4,6 +4,8 @@
 CURRENT_DIR="${PWD}"
 SUBPROJECT_DIR="projects/not-crm"
 
+echo "running ssi-npm-install.sh... CURRENT_DIR: $CURRENT_DIR, and SUBPROJECT_DIR: $SUBPROJECT_DIR"
+
 # install dependencies in the component repository first
 if [[ -f "$SUBPROJECT_DIR/package.json" ]]; then
   cd $SUBPROJECT_DIR

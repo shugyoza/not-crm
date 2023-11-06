@@ -11,6 +11,8 @@ export ORB_PARAM_CHROME_VERSION="latest"
 export ORB_PARAM_CHANNEL="stable"
 export ORB_PARAM_DRIVER_INSTALL_DIR="/usr/local/bin"
 
+echo "running cci-npm-test.sh... CURRENT_DIR: $CURRENT_DIR, and SUBPROJECT_DIR: $SUBPROJECT_DIR"
+
 if [[ $EUID == 0 ]]; then export SUDO=""; else export SUDO="sudo"; fi
 # install chrome
 if uname -a | grep Darwin >/dev/null 2>&1; then

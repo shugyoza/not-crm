@@ -23,7 +23,6 @@ jobs:
   run_install:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
-    app-dir: ~/project
     steps:
       - checkout
       - node/install-packages:
@@ -36,7 +35,6 @@ jobs:
   run_tests:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
-    app-dir: ~/project
     steps:
       - attach_workspace:
           at: ~/project
@@ -57,7 +55,6 @@ jobs:
   run_build:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
-    app-dir: ~/project
     steps:
       - attach_workspace:
           at: ~/project
