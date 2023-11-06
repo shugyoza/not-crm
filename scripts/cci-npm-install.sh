@@ -1,10 +1,9 @@
 #!/bin/bash -eo pipefail
 #!/bin/bash
+echo "cci-npm-install.sh script is starting..."
 
 CURRENT_DIR="${PWD}"
 SUBPROJECT_DIR="project/not-crm"
-
-echo "running ssi-npm-install.sh... CURRENT_DIR: $CURRENT_DIR, and SUBPROJECT_DIR: $SUBPROJECT_DIR"
 
 # install dependencies in the component repository first
 if [[ -f "$SUBPROJECT_DIR/package.json" ]]; then
@@ -18,6 +17,7 @@ fi
 # Install root level dependencies
 cd $CURRENT_DIR
 echo "Installing dependencies in $PWD ..."
-echo "$(ls -lah)"
+
+echo "Listing everyting inside this current directory is: $CURRENT_DIR: $(ls -lah)"
 
 npm install --no-audit
