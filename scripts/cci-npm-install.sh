@@ -18,3 +18,5 @@ fi
 # Install root level dependencies
 cd $CURRENT_DIR
 echo "Installing dependencies in $PWD ..."
+
+npm install --no-audit
