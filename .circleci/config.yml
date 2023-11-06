@@ -10,8 +10,12 @@ workflows:
   ci-initialization:
     jobs:
       - run_install
-      - run_tests
-      - run_build
+      - run_tests:
+          requires:
+            - run_install
+      - run_build:
+          requires:
+            - run_tests
 
 executors:
   cimg_node_self_hosted_runner:
@@ -40,17 +44,17 @@ jobs:
           at: ~/project
       # - browser-tools/install-chrome
       # - browser-tools/install-chromedriver
-      # - run: # this is only needed when we have env files in another github repo
-      #     name: 'list env and dir files'
-      #     command: |
-      #       ls -lah
-      # - node/install-packages:
-      #     pkg-manager: npm
-      #     override-ci-command: npm run cci:install
-      # - persist_to_workspace:
-      #     root: ~/project
-      #     paths:
-      #       - .
+      - run: # this is only needed when we have env files in another github repo
+          name: 'list env and dir files'
+          command: |
+            ls -lah
+      - node/install-packages:
+          pkg-manager: npm
+          override-ci-command: npm run cci:install
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
       - run:
           name: 'run unit test:cci'
           command: 'npm run cci:test'
