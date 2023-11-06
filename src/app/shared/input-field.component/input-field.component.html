@@ -1,0 +1,18 @@
+<div class="{{ fieldClassName }}">
+  <label
+    for="{{ labelFor }}"
+    class="{{ labelClassName }}"
+    [ngStyle]="labelNgStyle"
+  >
+    {{ labelText }}
+  </label>
+  <input
+    type="{{ inputType }}"
+    id="{{ inputId }}"
+    name="{{ inputName }}"
+    placeholder="{{ inputPlaceholder }}"
+    class="{{ inputClassName }}"
+    [ngStyle]="inputNgStyle"
+    (keyup)="onChange($event)"
+  />
+</div>
