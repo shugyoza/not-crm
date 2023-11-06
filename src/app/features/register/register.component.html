@@ -1,1 +1,57 @@
-<p>register works!</p>
+<main>
+  <fieldset>
+    <app-input-field
+      [labelFor]="'username'"
+      [labelClassName]="'label-username'"
+      [labelText]="'Username'"
+      [inputType]="'text'"
+      [inputId]="'input-username'"
+      [inputName]="'username'"
+      [inputPlaceholder]="'e.g. tango123'"
+      [inputClassName]="'input-username'"
+      (inputChange)="onChange($event)"
+    >
+    </app-input-field>
+
+    <app-input-field
+      [labelFor]="'email'"
+      [labelClassName]="'label-email'"
+      [labelText]="'Email'"
+      [inputType]="'email'"
+      [inputId]="'input-email'"
+      [inputName]="'email'"
+      [inputPlaceholder]="'e.g. monster.cookie@sesame-street.com'"
+      [inputClassName]="'input-email'"
+      (inputChange)="onChange($event)"
+    >
+    </app-input-field>
+
+    <app-input-field
+      [labelFor]="'password'"
+      [labelClassName]="'label-password'"
+      [labelText]="'Password'"
+      [inputType]="'password'"
+      [inputId]="'input-password'"
+      [inputName]="'password'"
+      [inputPlaceholder]="'e.g. Password123#'"
+      [inputClassName]="'input-password'"
+      (inputChange)="onChange($event)"
+    >
+    </app-input-field>
+
+    <app-input-field
+      [labelFor]="'confirmPassword'"
+      [labelClassName]="'input-confirm-password'"
+      [labelText]="'Confirm password'"
+      [inputType]="'password'"
+      [inputId]="'input-confirm-password'"
+      [inputName]="'confirmPassword'"
+      [inputPlaceholder]="'e.g. Password123#'"
+      [inputClassName]="'input-confirm-password'"
+      (inputChange)="onChange($event)"
+    >
+    </app-input-field>
+
+    <a role="link" (click)="onClick()"> Register </a>
+  </fieldset>
+</main>

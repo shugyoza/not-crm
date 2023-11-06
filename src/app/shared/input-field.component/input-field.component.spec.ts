@@ -4,7 +4,7 @@ import { DebugElement } from '@angular/core';
 
 import { InputFieldComponent } from './input-field.component';
 
-fdescribe('InputFieldComponent', () => {
+describe('InputFieldComponent', () => {
   let component: InputFieldComponent;
   let fixture: ComponentFixture<InputFieldComponent>;
 

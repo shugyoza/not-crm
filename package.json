@@ -7,8 +7,8 @@
     "dev": "ng serve --host 0.0.0.0 --disable-host-check",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --code-coverage",
-    "test:watch": "ng test --watch --code-coverage",
+    "test": "ng test --code-coverage --browsers=ChromeHeadless",
+    "test:watch": "ng test --watch --code-coverage --browsers=ChromeHeadless",
     "cci:install": "sh scripts/cci-npm-install.sh",
     "cci:test": "sh scripts/cci-npm-test.sh"
   },
