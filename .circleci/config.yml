@@ -43,7 +43,6 @@ jobs:
       - run: # this is only needed when we have env files in another github repo
           name: 'list env and dir files'
           command: |
-            git branch --vv
             ls -lah
       - node/install-packages:
           pkg-manager: npm
