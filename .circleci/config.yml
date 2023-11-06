@@ -10,7 +10,7 @@ workflows:
   ci-initialization:
     jobs:
       - run_install
-      - run_test
+      - run_tests
       - run build
 
 executors:
