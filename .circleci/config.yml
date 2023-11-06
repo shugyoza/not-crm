@@ -27,7 +27,7 @@ jobs:
       - checkout
       - node/install-packages:
           pkg-manager: npm
-          override-ci-command: npm install --no-audit
+          override-ci-command: npm run cci:install
       - persist_to_workspace:
           root: ~/project
           paths:
