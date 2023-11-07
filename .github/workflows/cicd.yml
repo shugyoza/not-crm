@@ -10,6 +10,37 @@ on:
     branches: ["main", "release", "development"]
 
 jobs:
+
+  checking:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check protected branch
+        id: check-branch
+        run: |
+          if [[ ${{ github.ref }} == 'refs/heads/main' || ${{ github.ref }} == 'refs/heads/release' || ${{ github.release }} == 'refs/heads/development' ]]; then
+              echo "match=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Check Tag
+        id: check-tag
+        run: |
+          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "match=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Build Tag
+        if: steps.check-tag.outputs.match == 'true'
+        run: |
+          echo "Tag is a match"
+      - name: Push to Docker
+        if: steps.check-branch == 'true'
+        run: |
+          echo "Branch is protected"
+      - name: Dont push to Docker
+        if: steps.check-branch == 'false'
+        run: |
+          echo "Not pushing to Docker"
+
   # This workflow executes several linters on changed files based on languages used in your code base whenever
   # you push a code or open a pull request.
 
@@ -32,8 +63,8 @@ jobs:
   #         DEFAULT_BRANCH: "main"
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  testing:
-    runs-on: ubuntu-latest
+  # testing:
+  #   runs-on: ubuntu-latest
     # needs: linting
 
     # strategy:
@@ -41,8 +72,8 @@ jobs:
     #     node-version: [16.x] # [16.x, 18.x]
     #     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-      - uses: actions/checkout@v3
+    # steps:
+    #   - uses: actions/checkout@v3
       # - name: Use Node.js ${{ matrix.node-version }}
       #   uses: actions/setup-node@v3
       #   with:
@@ -51,12 +82,12 @@ jobs:
       # - run: npm ci
       # # - run: npm run build --if-present
       # - run: npm run ci:test
-      - name: "github.ref"
-        shell: bash
-        run: echo is a main, release or development branch? "${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/development' }}"
-      - name: "github.ref"
-        shell: bash
-        run: echo is a feature branch? ${{ github.ref == *'/feature/'* }}
+      # - name: "github.ref"
+      #   shell: bash
+      #   run: echo is a main, release or development branch? "${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/development' }}"
+      # - name: "github.ref"
+      #   shell: bash
+      #   run: echo is a feature branch? ${{ github.ref == *'/feature/'* }}
 
   # docker:
   #   # if: ${{ (github.ref == "refs/heads/main") || (github.ref == "refs/heads/release") || (github.ref == "refs/heads/development") }}
