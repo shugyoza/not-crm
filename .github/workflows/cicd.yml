@@ -53,7 +53,10 @@ jobs:
       # - run: npm run ci:test
       - name: "github.ref"
         shell: bash
-        run: echo "${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/development' }}"
+        run: echo is a main, release or development branch? "${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release' || github.ref == 'refs/heads/development' }}"
+      - name: "github.ref"
+        shell: bash
+        run: echo is a feature branch? ${{ github.ref == *'/feature/'* }}
 
   # docker:
   #   # if: ${{ (github.ref == "refs/heads/main") || (github.ref == "refs/heads/release") || (github.ref == "refs/heads/development") }}
