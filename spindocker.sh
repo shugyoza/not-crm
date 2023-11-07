@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE_TAG="not-crm-img"
-CONTAINER_NAME="not-crm-container"
+# CONTAINER_NAME="not-crm-container"
 HOST_PORT=4200
 CONTAINER_PORT=4200
 
