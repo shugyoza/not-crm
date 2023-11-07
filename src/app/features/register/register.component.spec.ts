@@ -40,7 +40,7 @@ describe('RegisterComponent', () => {
     component.onChange(inputEvent);
     fixture.detectChanges();
 
-    expect(component.email).toEqual(inputEvent.value);
+    expect(component.password).toEqual(inputEvent.value);
   });
 
   it('should have the confirmPassword updated when .onChange() got called with an object that has id = "confirmPassword"', () => {
@@ -51,6 +51,6 @@ describe('RegisterComponent', () => {
     component.onChange(inputEvent);
     fixture.detectChanges();
 
-    expect(component.email).toEqual(inputEvent.value);
+    expect(component.confirmPassword).toEqual(inputEvent.value);
   });
 });
