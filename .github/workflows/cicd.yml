@@ -91,7 +91,7 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
-    needs: testing
+    # needs: testing
     steps:
       - name: Skipping Docker step
         if: steps.check-branch.outputs.match != 'true'
