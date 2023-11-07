@@ -1,5 +1,6 @@
-#!/bin/bash -eo pipefail
 #!/bin/bash
+
+set -u -o pipefail
 
 # This script will install chrome and chrome driver before running automated tests
 # This script comes from CircleCI's Browser Tools orb https://circleci.com/developer/orbs/orb/circleci/browser-tools
@@ -150,7 +151,7 @@ echo "ChromeDriver $CHROMEDRIVER_VERSION will be installed"
 
 # download chromedriver
 curl --show-error --location --fail --retry 3 \
-  --output chromedriver_$PLATFORM.zip \
+  --output chromedriver_"$PLATFORM".zip \
   "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_$PLATFORM.zip"
 
 # setup chromedriver installation

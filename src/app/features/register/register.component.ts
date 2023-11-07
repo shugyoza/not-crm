@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { InputFieldEvent } from 'src/app/shared/shared.interfaces';
 
@@ -8,9 +8,9 @@ import { InputFieldEvent } from 'src/app/shared/shared.interfaces';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  public email: string = '';
-  public password: string = '';
-  public confirmPassword: string = '';
+  public email = '';
+  public password = '';
+  public confirmPassword = '';
 
   public onChange(event: InputFieldEvent): void {
     const { id, value } = event;
