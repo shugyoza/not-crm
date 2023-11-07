@@ -9,7 +9,7 @@ on:
 env:
   # if it is a main, release, or development branch, we want to create and push docker image
   DOCKERIZE: ${{ (github.ref == 'refs/heads/main') || (github.ref == 'refs/heads/release') || (github.ref == 'refs/heads/development') }}
-  VERSION_TAGGED: ${{ (github.event.ref =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$) }}
+  VERSION_TAGGED: ${{ (github.event.ref =~ '^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$)' }}
 
 jobs:
   evaluating:
