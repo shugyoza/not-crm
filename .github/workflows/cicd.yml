@@ -32,10 +32,10 @@ jobs:
           echo "Tag is a match"
           echo "is protected? ISPROTECTED_BRANCH"
       - name: Docker push
-        if: ${{ DOCKERIZE == 'true' }}
+        if: $DOCKERIZE == 'true'
         run: echo "push to docker"
       - name: Skip docker
-        if: ${{ DOCKERIZE == 'false' }}
+        if: $DOCKERIZE == 'false'
         run: echo "skip docker"
 
   # This workflow executes several linters on changed files based on languages used in your code base whenever
