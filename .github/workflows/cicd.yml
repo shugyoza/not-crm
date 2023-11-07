@@ -37,7 +37,7 @@ jobs:
         run: |
           echo "Branch is protected"
       - name: Dont push to Docker
-        if: steps.check-branch.outputs.match == 'false'
+        if: steps.check-branch.outputs.match -ne 'true'
         run: |
           echo "Not pushing to Docker"
 
