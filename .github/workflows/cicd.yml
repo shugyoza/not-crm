@@ -53,7 +53,8 @@ jobs:
       - run: npm run ci:test
       - name: github.ref
         shell: bash
-        run: echo ${{ github.ref }} # "running on branch ${GITHUB_REF##*/}"
+        run: if [[ ${{ github.ref }} == *"/feature/"* ]]; then echo "a feature branch!" fi
+# ${{ github.ref }} # "running on branch ${GITHUB_REF##*/}"
 
   # docker:
   #   # if: ${{ (branches == "main") || (branches == "release") || (branches == "development") }}
