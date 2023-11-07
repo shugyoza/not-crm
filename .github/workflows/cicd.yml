@@ -53,7 +53,7 @@ jobs:
       # - run: npm run ci:test
       - name: "github.ref"
         shell: bash
-        run: echo isMain ${{ github.ref == "refs/heads/main" }} isRelease ${{ github.ref == "refs/heads/release" }} isDev ${{ github.ref == "refs/heads/development"}}
+        run: echo ${{ github.ref == "refs/heads/main" || github.ref == "refs/heads/release" || github.ref == "refs/heads/development" }}
 
   # docker:
   #   # if: ${{ (github.ref == "refs/heads/main") || (github.ref == "refs/heads/release") || (github.ref == "refs/heads/development") }}
