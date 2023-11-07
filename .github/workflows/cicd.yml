@@ -71,12 +71,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - run: |
-          if [[ ${{ env.DOCKERIZE }} == 'true' ]]; then
-            echo "Dockerizing..."
-          else
-            echo "Skipping docker step..."
-          fi
+      - name: Dockerize?
+        run: ${{ env.DOCKERIZE == 'true' }}
       # - name: Skipping Docker step
       #   if: steps.check-branch.outputs.match != 'true'
       #   run: |
