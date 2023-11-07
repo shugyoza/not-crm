@@ -19,7 +19,7 @@ jobs:
       - name: Check protected branch
         id: check-branch
         run: |
-          if [[ ${{ github.ref }} == 'refs/heads/main' || ${{ github.ref }} == 'refs/heads/release' || ${{ github.release }} == 'refs/heads/development' ]]; then
+          if [[ ${{ github.ref }} == 'refs/heads/main' ]] || [[ ${{ github.ref }} == 'refs/heads/release' ]] || [[ ${{ github.release }} == 'refs/heads/development' ]]; then
               echo "match=true" >> $GITHUB_OUTPUT
           fi
       - name: Check Tag
