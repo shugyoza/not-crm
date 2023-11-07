@@ -52,7 +52,7 @@ jobs:
       # - run: npm run build --if-present
       - run: npm run ci:test
       - name: Branch name
-        run: echo running on branch ${GITHUB_REF##*/}
+        run: echo "running on branch ${GITHUB_REF##*/}"
 
   # docker:
   #   # if: ${{ (branches == "main") || (branches == "release") || (branches == "development") }}
