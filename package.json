@@ -10,7 +10,8 @@
     "test": "ng test --code-coverage --browsers=ChromeHeadless",
     "test:watch": "ng test --watch --code-coverage --browsers=ChromeHeadless",
     "cci:install": "sh scripts/cci-npm-install.sh",
-    "cci:test": "sh scripts/cci-npm-test.sh"
+    "cci:test": "sh scripts/cci-npm-test.sh",
+    "ci:test": "npx ng test --project not-crm --no-watch --no-progress --code-coverage --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
