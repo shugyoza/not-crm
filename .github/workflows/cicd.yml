@@ -9,19 +9,12 @@ on:
 env:
   # if it is a main, release, or development branch, we want to create and push docker image
   DOCKERIZE: ${{ (github.ref == 'refs/heads/main') || (github.ref == 'refs/heads/release') || (github.ref == 'refs/heads/development') }}
-  VERSION_TAGGED: ${{ (github.event.ref =~ '^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$)' }}
 
 jobs:
   evaluating:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check if the branch is a protected one
-        id: check-branch
-        run: |
-          if [[ ${{ github.ref }} == 'refs/heads/main' ]] || [[ ${{ github.ref }} == 'refs/heads/release' ]] || [[ ${{ github.ref }} == 'refs/heads/development' ]]; then
-              echo "match=true" >> $GITHUB_OUTPUT
-          fi
       - name: Check Tag
         id: check-tag
         run: |
@@ -32,14 +25,6 @@ jobs:
         if: steps.check-tag.outputs.match == 'true'
         run: |
           echo "Tag is a match"
-          echo "is protected? ISPROTECTED_BRANCH"
-      - name: Docker push
-        if: env.DOCKERIZE == 'true'
-        run: echo "push to docker"
-      - name: Skip docker
-        if: env.DOCKERIZE == 'false'
-        run: echo "skip docker"
-      - run: echo ${{ env.VERSION_TAGGED }}
 
   # This workflow executes several linters on changed files based on languages used in your code base whenever
   # you push a code or open a pull request.
