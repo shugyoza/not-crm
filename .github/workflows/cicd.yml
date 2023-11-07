@@ -7,6 +7,7 @@ on:
     branches: ["main", "release", "development"]
 
 env:
+  # if it is a main, release, or development branch, we want to create and push docker image
   DOCKERIZE: ${{ (github.ref == 'refs/heads/main') || (github.ref == 'refs/heads/release') || (github.ref == 'refs/heads/development') }}
 
 jobs:
@@ -89,10 +90,10 @@ jobs:
     steps:
 
       - run: |
-          if [[ ${{ steps.check-branch.outputs.match }} == 'true' ]]; then
-            echo "Dockerizing"
+          if [[ ${{ env.DOCKERIZE }} == 'true' ]]; then
+            echo "Dockerizing..."
           else
-            echo "Skipping docker step"
+            echo "Skipping docker step..."
           fi
       # - name: Skipping Docker step
       #   if: steps.check-branch.outputs.match != 'true'
@@ -105,22 +106,22 @@ jobs:
       #     echo "Creating docker image and push."
 
       - name: Set up QEMU
-        if: ${{ github.ref }} == 'refs/heads/main' ]] || [[ ${{ github.ref }} == 'refs/heads/release' ]] || [[ ${{ github.ref }} == 'refs/heads/development'
+        if: env.DOCKERIZE == 'true'
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
-        if: ${{ github.ref }} == 'refs/heads/main' ]] || [[ ${{ github.ref }} == 'refs/heads/release' ]] || [[ ${{ github.ref }} == 'refs/heads/development'
+        if: env.DOCKERIZE == 'true'
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
-        if: ${{ github.ref }} == 'refs/heads/main' ]] || [[ ${{ github.ref }} == 'refs/heads/release' ]] || [[ ${{ github.ref }} == 'refs/heads/development'
+        if: env.DOCKERIZE == 'true'
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        if: ${{ github.ref }} == 'refs/heads/main' ]] || [[ ${{ github.ref }} == 'refs/heads/release' ]] || [[ ${{ github.ref }} == 'refs/heads/development'
+        if: env.DOCKERIZE == 'true'
         uses: docker/build-push-action@v5
         with:
           push: true
