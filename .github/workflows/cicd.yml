@@ -7,7 +7,7 @@ on:
     branches: ["main", "release", "development"]
 
 env:
-  ISPROTECTED_BRANCH: ${{ github.ref }} == 'refs/heads/main' ]] || [[ ${{ github.ref }} == 'refs/heads/release' ]] || [[ ${{ github.ref }} == 'refs/heads/development'
+  ISPROTECTED_BRANCH: ${{ github.ref }} == 'refs/heads/main' || ${{ github.ref }} == 'refs/heads/release' || ${{ github.ref }} == 'refs/heads/development'
 
 jobs:
   evaluating:
@@ -30,7 +30,7 @@ jobs:
         if: steps.check-tag.outputs.match == 'true'
         run: |
           echo "Tag is a match"
-          echo "is protected?${{ ISPROTECTED_BRANCH }}"
+          echo "is protected? $ISPROTECTED_BRANCH"
 
   # This workflow executes several linters on changed files based on languages used in your code base whenever
   # you push a code or open a pull request.
