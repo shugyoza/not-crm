@@ -1,5 +1,6 @@
 {
+  "attr-lowercase": false,
   "doctype-first": false,
   "doctype-html5": false,
-  "id-class-value": false,
+  "id-class-value": ""
 }

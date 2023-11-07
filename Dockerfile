@@ -9,7 +9,7 @@ COPY "package.json" .
 RUN npm install
 
 # add whatever that came out after npm i to current directory
-ADD . /usr/src/app
+COPY . /usr/src/app
 
 RUN npm run build
 

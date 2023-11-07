@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 IMAGE_TAG="not-crm-img"
 CONTAINER_NAME="not-crm-container"
