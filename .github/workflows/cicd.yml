@@ -7,7 +7,7 @@ on:
     branches: ["main", "release", "development"]
 
 env:
-  ISPROTECTED_BRANCH: ${{ (github.ref == 'refs/heads/main') || (github.ref == 'refs/heads/release') || (github.ref == 'refs/heads/development') }}
+  DOCKERIZE: ${{ (github.ref == 'refs/heads/main') || (github.ref == 'refs/heads/release') || (github.ref == 'refs/heads/development') }}
 
 jobs:
   evaluating:
@@ -31,6 +31,12 @@ jobs:
         run: |
           echo "Tag is a match"
           echo "is protected? $ISPROTECTED_BRANCH"
+      - name: Docker push
+        if: $DOCKERIZE == 'true'
+        run: echo "push to docker"
+      - name: Skip docker
+        if: $DOCKERIZE == 'false'
+        run: echo "skip docker"
 
   # This workflow executes several linters on changed files based on languages used in your code base whenever
   # you push a code or open a pull request.
