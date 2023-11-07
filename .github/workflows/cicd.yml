@@ -24,7 +24,7 @@ jobs:
               echo "match=true" >> $GITHUB_OUTPUT
           fi
       - name: Build Tag
-        if: steps.check-tag.outputs.match == 'true'
+        if: ${{ steps.check-tag.outputs.match }} == "true"
         run: |
           echo "Tag is a match"
 
@@ -35,6 +35,7 @@ jobs:
   # For more information, see:
   # https://github.com/github/super-linter
   linting:
+    needs: evaluating
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -53,8 +54,8 @@ jobs:
   # 'This' workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
   # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
   testing:
-    runs-on: ubuntu-latest
     needs: linting
+    runs-on: ubuntu-latest
 
     strategy:
       matrix: # performing action on multiple version/platform
@@ -73,12 +74,12 @@ jobs:
       - run: npm run ci:test
 
   docker:
-    runs-on: ubuntu-latest
     needs: testing
+    runs-on: ubuntu-latest
     steps:
 
       - run: |
-          if [[ ${{ steps.check-branch.outputs.match }} != 'true' ]]; then 
+          if [[ ${{ steps.check-branch.outputs.match }} != "true" ]]; then 
             echo "Skipping docker step..." 
           else
             echo "Dockerizing"
@@ -94,22 +95,22 @@ jobs:
       #     echo "Creating docker image and push."
 
       - name: Set up QEMU
-        if: steps.check-branch.outputs.match == 'true'
+        if: ${{ steps.check-branch.outputs.match }} != "true"
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
-        if: steps.check-branch.outputs.match == 'true'
+        if: ${{ steps.check-branch.outputs.match }} != "true"
         uses: docker/setup-buildx-action@v3
 
       - name: Login to Docker Hub
-        if: steps.check-branch.outputs.match == 'true'
+        if: ${{ steps.check-branch.outputs.match }} != "true"
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        if: steps.check-branch.outputs.match == 'true'
+        if: ${{ steps.check-branch.outputs.match }} != "true"
         uses: docker/build-push-action@v5
         with:
           push: true
