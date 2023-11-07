@@ -10,7 +10,7 @@ env:
   # if it is a main, release, or development branch, we want to create and push docker image
   # DOCKERIZE: ${{ endsWith(github.ref, '/main') || endsWith(github.ref, '/release') || endsWith(github.ref, '/development') }}
   # DOCKERIZE: ${{ (github.ref == 'refs/heads/main') || (github.ref == 'refs/heads/release') || (github.ref == 'refs/heads/development') }}
-  DOCKERIZE: endsWith(github.ref, '/main')
+  DOCKERIZE: endsWith(github.ref, '/main') # temporarily I let's just create docker image only for main build
   VERSION_TAGGED: ${{ contains(github.event.ref, '/tags/v') }}
 
 jobs:
