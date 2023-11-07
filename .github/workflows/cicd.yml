@@ -33,11 +33,11 @@ jobs:
         run: |
           echo "Tag is a match"
       - name: Push to Docker
-        if: steps.check-branch == 'true'
+        if: steps.check-branch.outputs.match == 'true'
         run: |
           echo "Branch is protected"
       - name: Dont push to Docker
-        if: steps.check-branch == 'false'
+        if: steps.check-branch.outputs.match == 'false'
         run: |
           echo "Not pushing to Docker"
 
