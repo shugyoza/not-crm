@@ -1,10 +1,10 @@
 * {
-  font-size: min(4rem, max(.875rem, 2vw))
+  font-size: min(4rem, max(0.875rem, 2vw));
 }
 
 main {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
 fieldset {
@@ -12,7 +12,7 @@ fieldset {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: fit-content
+  width: fit-content;
 }
 
 .field {
