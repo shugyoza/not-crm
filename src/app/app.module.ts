@@ -11,6 +11,6 @@ import { AppComponent } from './app.component'
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, SharedModule, RegisterModule],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

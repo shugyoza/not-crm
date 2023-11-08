@@ -6,6 +6,6 @@ import { InputFieldComponent } from './input-field.component/input-field.compone
 @NgModule({
   declarations: [InputFieldComponent],
   imports: [CommonModule],
-  exports: [InputFieldComponent],
+  exports: [InputFieldComponent]
 })
 export class SharedModule {}

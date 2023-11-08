@@ -10,12 +10,12 @@ const routes: Routes = [
     loadChildren: async () =>
       await import('./features/register/register.module').then(
         (m) => m.RegisterModule
-      ),
-  },
+      )
+  }
 ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

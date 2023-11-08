@@ -10,7 +10,7 @@ describe('InputFieldComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [InputFieldComponent],
+      declarations: [InputFieldComponent]
     })
     fixture = TestBed.createComponent(InputFieldComponent)
     component = fixture.componentInstance
@@ -65,7 +65,7 @@ describe('InputFieldComponent', () => {
     spyOn(component.inputChange, 'emit').and.callThrough()
 
     const element = {
-      target: { id: 'input-id', value: 'input-value' },
+      target: { id: 'input-id', value: 'input-value' }
     } as any
     component.onChange(element)
 

@@ -5,7 +5,7 @@ import { InputFieldEvent } from '../shared.interfaces'
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
-  styleUrls: ['./input-field.component.scss'],
+  styleUrls: ['./input-field.component.scss']
 })
 export class InputFieldComponent {
   @Input() labelFor = ''
@@ -30,7 +30,7 @@ export class InputFieldComponent {
 
     this.inputChange.emit({
       id,
-      value,
+      value
     })
   }
 }
