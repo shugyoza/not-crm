@@ -6,7 +6,7 @@
 # We map our local codebase to /tmp/lint so that the linter can pick up the code.
 # The way we set environment variables is of course different, but the overall process of running the GitHub Super Linter remains the same.
 
-if [ $(uname -m) == 'arm64' ]; then
+if [ "$(uname -m)" == "arm64" ]; then
   echo "This docker image can only be run on linux/amd64 platform"
   # docker run -e RUN_LOCAL=true -e USE_FIND_ALGORITHM=true -e VALIDATE_PYTHON_BLACK=true -v --platform linux/$(uname -m) "$PROJECT_DIRECTORY:/tmp/lint" "$IMAGE_TAG"
   exit 1
