@@ -74,10 +74,11 @@ jobs:
           LINTER_RULES_PATH: /
           JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
           VALIDATE_JAVASCRIPT_STANDARD: false
-          VALIDATE_HTML: false # if enabled, rule must be customized, else it will throw trivial complaints that is difficult to accommodate, e.g: must include DOC=HTML at the start of every .html
-          VALIDATE_POWERSHELL: false # disabled because it throws non sense errors, i.e.: 'error  Parsing error: Unexpected token :'
-          VALIDATE_SHELL_SHFMT: false # disabled as it throws non sense errors as well
-          VALIDATE_JSON: false # disabled because it throws non sense errors, i.e.: 'error  Parsing error: Unexpected token :'
+          # disabled for throwing trivial or non-sensical errors
+          VALIDATE_HTML: false # err on .component.html, e.g: must include DOC=HTML at the start of every .html
+          VALIDATE_POWERSHELL: false # error on .sh, i.e.: 'error  Parsing error: Unexpected token :'
+          VALIDATE_SHELL_SHFMT: false # err on .sh, strict non-sense as there is no hint about what is wrong.
+          VALIDATE_JSON: false # err on .json, i.e.: 'error  Parsing error: Unexpected token :'
       # - run: npm run build --if-present
       - name: Running unit tests
         run: npm run ci:test
