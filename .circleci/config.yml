@@ -50,7 +50,7 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - run: # this is only needed when we have env files in another github repo
-          name: "list env and dir files"
+          name: 'list env and dir files'
           command: |
             ls -lah
       - node/install-packages:
@@ -61,8 +61,8 @@ jobs:
           paths:
             - .
       - run:
-          name: "run unit ci:test"
-          command: "npm run ci:test"
+          name: 'run unit ci:test'
+          command: 'npm run ci:test'
   run_build:
     executor: cimg_node_self_hosted_runner
     working_directory: ~/project
@@ -70,7 +70,7 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: "run build"
-          command: "npm run build"
+          name: 'run build'
+          command: 'npm run build'
       - store_artifacts:
           path: ./dist

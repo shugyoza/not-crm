@@ -1,4 +1,4 @@
 export interface InputFieldEvent {
-  id: string;
-  value: string;
+  id: string
+  value: string
 }

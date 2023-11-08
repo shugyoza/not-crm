@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { InputFieldComponent } from './input-field.component/input-field.component';
+import { InputFieldComponent } from './input-field.component/input-field.component'
 
 @NgModule({
   declarations: [InputFieldComponent],

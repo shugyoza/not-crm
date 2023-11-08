@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
 
-import { RegisterComponent } from './register.component';
+import { RegisterComponent } from './register.component'
 
 const routes: Routes = [
   {
@@ -9,7 +9,7 @@ const routes: Routes = [
     component: RegisterComponent,
     children: [],
   },
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
