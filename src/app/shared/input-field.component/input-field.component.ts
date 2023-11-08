@@ -25,7 +25,7 @@ export class InputFieldComponent {
 
   @Output() inputChange: EventEmitter<InputFieldEvent> = new EventEmitter()
 
-  public onChange(event: Event): void {
+  public onChange (event: Event): void {
     const { id, value } = event.target as HTMLInputElement
 
     this.inputChange.emit({
