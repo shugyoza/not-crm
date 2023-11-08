@@ -23,6 +23,7 @@ globals:
 ignorePatterns:
   - "!.*"
   - "**/node_modules/.*"
+  - "**.sh"
 
 ###############
 # Parser vars #
