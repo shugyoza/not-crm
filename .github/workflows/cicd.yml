@@ -14,59 +14,41 @@ env:
   VERSION_TAGGED: ${{ contains(github.event.ref, '/tags/v') }}
 
 jobs:
-  # This workflow executes several linters on changed files based on languages used in your code base whenever
-  # you push a code or open a pull request.
-
-  # You can adjust the behavior by modifying this file.
-  # For more information, see:
-  # https://github.com/github/super-linter
-  # linting:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #       with:
-  #         # Full git history is needed to get a proper list of changed files within `super-linter`
-  #         fetch-depth: 0
-  #     - name: Lint Code Base
-  #       uses: github/super-linter@v4
-  #       # for rules, refer to everything within this folder: https://github.com/github/super-linter/blob/main/TEMPLATES/
-  #       env:
-  #         VALIDATE_ALL_CODEBASE: false
-  #         DEFAULT_BRANCH: "main"
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         # below is for customizing lint rules
-  #         LINTER_RULES_PATH: /
-  #         JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
-  #         VALIDATE_JAVASCRIPT_STANDARD: false
-  #         # VALIDATE_HTML: true # if set true, rule must be customized, else it will throw trivial complaints that is difficult to accommodate, e.g: must include DOC=HTML at the start of every .html
-
   # 'This' workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
   # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
   ci-initialization:
-    # needs: linting
     runs-on: ubuntu-latest
+
     strategy:
       matrix: # performing action on multiple version/platform
         node-version: [16.x] # [16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
+
       - name: Installing
         run: npm ci
+
+      # This workflow executes several linters on changed files based on languages used in your code base whenever
+      # you push a code or open a pull request.
+
+      # Adjust the behavior by modifying env vars, list see: https://github.com/super-linter/super-linter
+      # or add customized files in .github/linters/ directory, list see: https://github.com/github/super-linter/blob/main/TEMPLATES/
       - name: Lint Code Base
         uses: github/super-linter@v4
-        # for rules, refer to everything within this folder: https://github.com/github/super-linter/blob/main/TEMPLATES/
-        env: # refer to: https://github.com/super-linter/super-linter
+        env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -80,27 +62,34 @@ jobs:
           VALIDATE_SHELL_SHFMT: false # err on .sh, strict non-sense as there is no hint about what is wrong.
           VALIDATE_JSON: false # err on .json, i.e.: 'error  Parsing error: Unexpected token :'
       # - run: npm run build --if-present
+
       - name: Running unit tests
         run: npm run ci:test
+
       - name: Running ng lint
         run: npm run lint
 
   docker:
     needs: ci-initialization
     runs-on: ubuntu-latest
+
     steps:
+
       - name: Set up QEMU
         if: env.DOCKERIZE == 'true'
         uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         if: env.DOCKERIZE == 'true'
         uses: docker/setup-buildx-action@v3
+
       - name: Login to Docker Hub
         if: env.DOCKERIZE == 'true'
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build and push
         if: env.DOCKERIZE == 'true'
         uses: docker/build-push-action@v5
