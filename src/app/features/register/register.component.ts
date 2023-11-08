@@ -12,7 +12,7 @@ export class RegisterComponent {
   public password = ''
   public confirmPassword = ''
 
-  public onChange(event: InputFieldEvent): void {
+  public onChange (event: InputFieldEvent): void {
     const { id, value } = event
 
     switch (id) {
@@ -28,7 +28,7 @@ export class RegisterComponent {
     }
   }
 
-  public onClick(): void {
+  public onClick (): void {
     console.log('onClick()')
   }
 }
