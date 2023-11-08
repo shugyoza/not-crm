@@ -25,7 +25,6 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -75,7 +74,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Set up QEMU
         if: env.DOCKERIZE == 'true'
         uses: docker/setup-qemu-action@v3
