@@ -9,7 +9,7 @@ SUBPROJECT_DIR="project/not-crm"
 
 # install dependencies in the component repository first
 if [[ -f "$SUBPROJECT_DIR/package.json" ]]; then
-  cd "$SUBPROJECT_DIR"
+  cd "$SUBPROJECT_DIR" || exit # in case fail
   echo "Installing dependencies in $PWD"
   npm install --no-audit
 else
@@ -17,7 +17,7 @@ else
 fi
 
 # Install root level dependencies
-cd "$CURRENT_DIR"
+cd "$CURRENT_DIR" || exit # in case fail
 echo "Installing dependencies in $PWD ..."
 
 echo "Listing everyting inside this current directory is: $CURRENT_DIR: $(ls -lah)"
