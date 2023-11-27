@@ -7,3 +7,9 @@ div {
   flex-direction: column;
   gap: 1rem;
 }
+
+input,
+div,
+label {
+  width: 100%;
+}
