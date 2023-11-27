@@ -1,59 +1,102 @@
-<main>
-  <fieldset>
-    <app-input-field
-      [labelFor]="'username'"
-      [labelClassName]="'label-username'"
-      [labelText]="'Username'"
-      [inputType]="'text'"
-      [inputId]="'input-username'"
-      [inputName]="'username'"
-      [inputPlaceholder]="'e.g. tango123'"
-      [inputClassName]="'input-username'"
-      (inputChange)="onChange($event)"
-    >
-    </app-input-field>
+<fieldset>
+  <form [formGroup]="register" (ngSubmit)="onSubmit()" id="registerForm">
+    <div class="label-input">
+      <div>
+        <label id="label-email" for="input-email"> Email: </label>
+        <span role="alert" class="error">
+          {{ email?.errors | errorsMessagePipe: errorMessages.email }}
+        </span>
+      </div>
+      <input id="input-email" type="text" formControlName="email" required />
+    </div>
 
-    <app-input-field
-      [labelFor]="'email'"
-      [labelClassName]="'label-email'"
-      [labelText]="'Email'"
-      [inputType]="'email'"
-      [inputId]="'input-email'"
-      [inputName]="'email'"
-      [inputPlaceholder]="'e.g. monster.cookie@sesame-street.com'"
-      [inputClassName]="'input-email'"
-      (inputChange)="onChange($event)"
-    >
-    </app-input-field>
+    <div class="label-input">
+      <div>
+        <label id="label-username" for="input-username"> Username: </label>
+        <span role="alert" class="error">
+          {{ username?.errors | errorsMessagePipe: errorMessages.username }}
+        </span>
+      </div>
 
-    <app-input-field
-      [labelFor]="'password'"
-      [labelClassName]="'label-password'"
-      [labelText]="'Password'"
-      [inputType]="'password'"
-      [inputId]="'input-password'"
-      [inputName]="'password'"
-      [inputPlaceholder]="'e.g. Password123#'"
-      [inputClassName]="'input-password'"
-      (inputChange)="onChange($event)"
-    >
-    </app-input-field>
+      <input
+        id="input-username"
+        type="email"
+        formControlName="username"
+        required
+      />
+    </div>
 
-    <app-input-field
-      [labelFor]="'confirmPassword'"
-      [labelClassName]="'input-confirm-password'"
-      [labelText]="'Confirm password'"
-      [inputType]="'password'"
-      [inputId]="'input-confirm-password'"
-      [inputName]="'confirmPassword'"
-      [inputPlaceholder]="'e.g. Password123#'"
-      [inputClassName]="'input-confirm-password'"
-      (inputChange)="onChange($event)"
-    >
-    </app-input-field>
+    <div class="label-input">
+      <div>
+        <label id="label-password" for="input-password"> Password: </label>
+        <span role="alert" class="error">
+          {{ password?.errors | errorsMessagePipe: errorMessages.password }}
+        </span>
+      </div>
 
-    <a href="#" role="link" (click)="onClick()" (keyup.enter)="onClick()">
-      Register
-    </a>
-  </fieldset>
-</main>
+      <input
+        id="input-password"
+        type="password"
+        formControlName="password"
+        required
+      />
+    </div>
+
+    <div class="label-input">
+      <div>
+        <label id="label-confirmPassword" for="input-confirmPassword">
+          Password confirmation:
+        </label>
+        <span role="alert" class="error">
+          {{
+            confirmPassword?.errors
+              | errorsMessagePipe: errorMessages.confirmPassword
+          }}
+        </span>
+        <span
+          role="alert"
+          [class.error]="
+            (
+              confirmPassword?.errors
+              | confirmPasswordPipe: password?.value : confirmPassword?.value
+            ).includes('not confirmed')
+          "
+          [class.ok]="
+            !(
+              confirmPassword?.errors
+              | confirmPasswordPipe: password?.value : confirmPassword?.value
+            ).includes('not confirmed')
+          "
+        >
+          {{
+            confirmPassword?.errors
+              | confirmPasswordPipe: password?.value : confirmPassword?.value
+          }}
+        </span>
+      </div>
+
+      <input
+        id="input-confirmPassword"
+        type="password"
+        formControlName="confirmPassword"
+        required
+      />
+    </div>
+
+    <div>
+      <button
+        type="submit"
+        [disabled]="
+          !register.valid ||
+          email?.errors ||
+          username?.errors ||
+          password?.errors ||
+          confirmPassword?.errors ||
+          password?.value !== confirmPassword?.value
+        "
+      >
+        Register
+      </button>
+    </div>
+  </form>
+</fieldset>
