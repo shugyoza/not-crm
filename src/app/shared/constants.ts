@@ -16,10 +16,6 @@ export const length = {
   },
 };
 
-export const invalid = {
-  password: /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/,
-};
-
 export const valid = {
   username: /^[a-zA-Z0-9][-a-zA-Z0-9_]*\$?$/,
   email:
