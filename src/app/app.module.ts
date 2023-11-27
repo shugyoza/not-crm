@@ -8,7 +8,6 @@ import { RegisterModule } from './features/register/register.module';
 
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { ErrorsMessagePipe } from './shared/pipes/errors-message.pipe';
 
 @NgModule({
   declarations: [AppComponent],

@@ -19,6 +19,7 @@ export const length = {
 export const valid = {
   username: /^[a-zA-Z0-9][-a-zA-Z0-9_]*\$?$/,
   email:
+    // eslint-disable-next-line no-useless-escape
     /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
   password: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
 };

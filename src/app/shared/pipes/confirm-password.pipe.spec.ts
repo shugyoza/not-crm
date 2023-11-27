@@ -1,3 +1,5 @@
+import { ValidationErrors } from '@angular/forms';
+
 import { ConfirmPasswordPipe } from './confirm-password.pipe';
 
 describe('ConfirmPasswordPipe', () => {
@@ -5,7 +7,9 @@ describe('ConfirmPasswordPipe', () => {
   const pipe = new ConfirmPasswordPipe();
 
   it('transforms truthy string errors to an empty string ""', () => {
-    const mockFieldErrors = { required: true };
+    const mockFieldErrors = {
+      required: true,
+    } as ValidationErrors;
     const result = pipe.transform(
       mockFieldErrors,
       'passwordValue',
@@ -16,7 +20,7 @@ describe('ConfirmPasswordPipe', () => {
   });
 
   it('returns empty string when password or confirmPassword is falsy', () => {
-    const mockFieldErrors = { required: true };
+    const mockFieldErrors = { required: true } as ValidationErrors;
     const result1 = pipe.transform(mockFieldErrors, null, 'something');
     const result2 = pipe.transform(mockFieldErrors, 'something', null);
 

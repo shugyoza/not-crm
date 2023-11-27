@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 @Pipe({
   name: 'confirmPasswordPipe',
 })
 export class ConfirmPasswordPipe implements PipeTransform {
   transform(
-    value: any,
+    value: ValidationErrors | null | undefined,
     password?: string | null,
     confirmPassword?: string | null
   ) {

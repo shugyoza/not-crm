@@ -13,8 +13,6 @@ const { required, minLength, maxLength, pattern } = Validators;
 export class RegisterComponent {
   public errorMessages = errorMessages;
 
-  constructor() {}
-
   public register = new FormGroup({
     email: new FormControl('', [
       required,

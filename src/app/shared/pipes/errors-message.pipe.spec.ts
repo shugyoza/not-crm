@@ -14,7 +14,7 @@ describe('ErrorsMessagePipe', () => {
   };
 
   it('transforms null errors to an empty string ""', () => {
-    const result = pipe.transform(null, errorMessages);
+    const result = pipe.transform(null, errorMessages.email);
     expect(result).toBe('');
   });
 
