@@ -26,25 +26,25 @@ export const valid = {
 
 export const errorMessages = {
   email: {
-    required: 'required',
-    minlength: `minimum ${length.email.min} characters`,
-    maxLength: `maximum ${length.email.max} characters`,
-    pattern: "email format must be valid, e.g: 'something@email.com'",
+    required: 'Required field',
+    minlength: `Email must have a minimum of ${length.email.min} characters`,
+    maxLength: `Email must have a maximum of ${length.email.max} characters`,
+    pattern: "Email format must be valid, e.g: 'something@email.com'",
   },
   username: {
-    required: 'required',
-    minlength: `minimum ${length.username.min} characters`,
-    maxLength: `maximum ${length.username.max} characters`,
+    required: 'Required field',
+    minlength: `Username must have a minimum of ${length.username.min} characters`,
+    maxLength: `Username must have a maximum of ${length.username.max} characters`,
     pattern:
-      "username can only have numbers, dash (-) underscore (-), lowercased letter, (NO CAPITAL letter), e.g: 'user_name-2'",
+      "Username can only contain number, dash (-) underscore (-), lowercased letter, (NO CAPITAL letter), e.g: 'user_name-2'",
   },
   password: {
-    required: 'required',
-    minlength: `minimum ${length.password.min} characters`,
+    required: 'Required field',
+    minlength: `Password must have a minimum of ${length.password.min} characters`,
     pattern:
-      'password must have at least one number, one capital letter, and one lowercase letter, e.g.: Password123',
+      'Password must contain at least one number, one capital letter, and one lowercase letter, e.g.: paSsword123',
   },
   confirmPassword: {
-    required: 'required',
+    required: 'Required field',
   },
 };
