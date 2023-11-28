@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { length, valid, errorMessages } from '../../shared/constants';
+import { RegisterHttpService } from './register-http.service';
 
 const { required, minLength, maxLength, pattern } = Validators;
 
@@ -12,6 +13,8 @@ const { required, minLength, maxLength, pattern } = Validators;
 })
 export class RegisterComponent {
   public errorMessages = errorMessages;
+
+  constructor(private http: RegisterHttpService) {}
 
   public register = new FormGroup({
     email: new FormControl('', [
@@ -36,7 +39,21 @@ export class RegisterComponent {
   });
 
   public onSubmit(): void {
-    console.log(this.register.value);
+    const { username, email, password } = this.register.value;
+
+    if (!username || !email || !password) {
+      return;
+    }
+
+    const form = {
+      email,
+      username,
+      password,
+      role: 'user',
+    };
+
+    console.log(form);
+    this.http.register(form);
   }
 
   get email() {
