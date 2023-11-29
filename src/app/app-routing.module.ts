@@ -12,6 +12,11 @@ const routes: Routes = [
         (m) => m.RegisterModule
       ),
   },
+  {
+    // temporary, will be replaced when login module has been developed
+    path: 'login',
+    redirectTo: '/',
+  },
 ];
 
 @NgModule({

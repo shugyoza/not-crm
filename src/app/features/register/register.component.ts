@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
 
 import { length, valid, errorMessages } from '../../shared/constants';
 import { RegisterHttpService } from './register-http.service';
@@ -13,8 +15,12 @@ const { required, minLength, maxLength, pattern } = Validators;
 })
 export class RegisterComponent {
   public errorMessages = errorMessages;
+  public loginFail = '';
 
-  constructor(private http: RegisterHttpService) {}
+  constructor(
+    private http: RegisterHttpService,
+    private router: Router
+  ) {}
 
   public register = new FormGroup({
     email: new FormControl('', [
@@ -52,8 +58,15 @@ export class RegisterComponent {
       role: 'user',
     };
 
-    console.log(form);
-    this.http.register(form);
+    this.http
+      .register(form)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/login']);
+        },
+        error: (error: Error) => console.log(error),
+      });
   }
 
   get email() {
