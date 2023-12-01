@@ -9,11 +9,13 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --code-coverage --browsers=ChromeHeadless",
     "test:watch": "ng test --watch --code-coverage --browsers=ChromeHeadless",
+    "test:view:coverage": "open ./coverage/not-crm/index.html",
     "cci:install": "sh scripts/cci-npm-install.sh",
     "cci:test": "sh scripts/cci-npm-test.sh",
     "ci:test": "npx ng test --project not-crm --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
     "lint": "ng lint",
-    "github/super-linter": "sh scripts/github-super-linter.sh"
+    "github/super-linter": "sh scripts/github-super-linter.sh",
+    "ci:build:prod": "ng build —prod —output-hashing name"
   },
   "private": true,
   "dependencies": {
