@@ -8,7 +8,7 @@ import { RegisterDTO, ApiResponseDTO } from './register.interface';
   providedIn: 'any',
 })
 export class RegisterHttpService {
-  private path = '/api/v1/account/register'; // '/api/v1/account';
+  private path = '/api/v1/account/register';
 
   constructor(private readonly http: HttpClient) {}
 
@@ -16,7 +16,6 @@ export class RegisterHttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: 'my-auth-token'
       }),
     };
 
@@ -29,11 +28,3 @@ export class RegisterHttpService {
     return result$;
   }
 }
-// const result$ = this.http.get(this.path);
-// result$.subscribe((val) => console.log(19, val));
-// return result$;
-
-/* set header because httpOptions is immutable
-        httpOptions.headers =
-        httpOptions.headers.set('Authorization', 'my-new-auth-token');
-    */
