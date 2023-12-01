@@ -44,7 +44,7 @@ export class RegisterComponent implements OnDestroy {
     const email = this.email.value || '';
     const password = this.password.value || '';
 
-    const regex = /[@\.]/gi;
+    const regex = /[@.]/gi;
     const username = email.replace(regex, '-');
 
     const form = {
