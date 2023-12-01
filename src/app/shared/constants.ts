@@ -27,9 +27,9 @@ export const valid = {
 export const errorMessages = {
   email: {
     required: 'Required field',
-    minlength: `Email must have a minimum of ${length.email.min} characters`,
-    maxLength: `Email must have a maximum of ${length.email.max} characters`,
-    pattern: "Email format must be valid, e.g: 'something@email.com'",
+    minlength: "Email format must be valid, e.g: 'a@b.ca'",
+    maxLength: `"Email format must be valid, e.g: 'not-this_long@email.com'"`,
+    pattern: "Email format must be valid, e.g: 'ab.cd@email.com'",
   },
   username: {
     required: 'Required field',
