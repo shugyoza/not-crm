@@ -10,8 +10,12 @@ interface AccountId {
 }
 
 export interface ApiResponseDTO {
-  status: string;
+  status: number;
   ok: boolean;
-  result: AccountId | null;
   message: string;
+  statusText?: string;
+  result?: AccountId;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error?: any;
+  name?: string;
 }
