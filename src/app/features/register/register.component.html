@@ -1,34 +1,18 @@
-<form [formGroup]="register" (ngSubmit)="onSubmit()" id="registerForm">
+<form (ngSubmit)="onSubmit()" id="registerForm">
   <fieldset>
     <legend>Register Form</legend>
     <div class="label-input">
       <input
         id="input-email"
         type="text"
-        formControlName="email"
+        [formControl]="email"
         placeholder="e.g: someone@email.com"
         required
       />
       <div class="label-error-wrapper">
         <label id="label-email" for="input-email"> Email.</label>
         <span role="alert" class="error">
-          {{ email?.errors | errorsMessagePipe: errorMessages.email }}
-        </span>
-      </div>
-    </div>
-
-    <div class="label-input">
-      <input
-        id="input-username"
-        type="email"
-        formControlName="username"
-        placeholder="e.g: user_name-888"
-        required
-      />
-      <div class="label-error-wrapper">
-        <label id="label-username" for="input-username"> Username. </label>
-        <span role="alert" class="error">
-          {{ username?.errors | errorsMessagePipe: errorMessages.username }}
+          {{ email.errors | errorsMessagePipe: errorMessages.email }}
         </span>
       </div>
     </div>
@@ -37,14 +21,14 @@
       <input
         id="input-password"
         type="password"
-        formControlName="password"
+        [formControl]="password"
         placeholder="e.g: Password123"
         required
       />
       <div class="label-error-wrapper">
         <label id="label-password" for="input-password"> Password. </label>
         <span role="alert" class="error">
-          {{ password?.errors | errorsMessagePipe: errorMessages.password }}
+          {{ password.errors | errorsMessagePipe: errorMessages.password }}
         </span>
       </div>
     </div>
@@ -53,7 +37,7 @@
       <input
         id="input-confirmPassword"
         type="password"
-        formControlName="confirmPassword"
+        [formControl]="confirmPassword"
         placeholder="e.g: Password123"
         required
       />
@@ -63,7 +47,7 @@
         </label>
         <span role="alert" class="error">
           {{
-            confirmPassword?.errors
+            confirmPassword.errors
               | errorsMessagePipe: errorMessages.confirmPassword
           }}
         </span>
@@ -71,20 +55,20 @@
           role="alert"
           [class.error]="
             (
-              confirmPassword?.errors
-              | confirmPasswordPipe: password?.value : confirmPassword?.value
+              confirmPassword.errors
+              | confirmPasswordPipe: password.value : confirmPassword.value
             ).includes('not confirmed')
           "
           [class.ok]="
             !(
-              confirmPassword?.errors
-              | confirmPasswordPipe: password?.value : confirmPassword?.value
+              confirmPassword.errors
+              | confirmPasswordPipe: password.value : confirmPassword.value
             ).includes('not confirmed')
           "
         >
           {{
-            confirmPassword?.errors
-              | confirmPasswordPipe: password?.value : confirmPassword?.value
+            confirmPassword.errors
+              | confirmPasswordPipe: password.value : confirmPassword.value
           }}
         </span>
       </div>
@@ -94,16 +78,15 @@
       <button
         type="submit"
         [disabled]="
-          !register.valid ||
-          email?.errors ||
-          username?.errors ||
-          password?.errors ||
-          confirmPassword?.errors ||
-          password?.value !== confirmPassword?.value
+          email.errors ||
+          password.errors ||
+          confirmPassword.errors ||
+          password.value !== confirmPassword.value
         "
       >
         Register
       </button>
+      <span class="error">{{ loginFail }}</span>
     </div>
   </fieldset>
 </form>
