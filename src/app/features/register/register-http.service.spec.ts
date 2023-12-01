@@ -5,6 +5,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { RegisterHttpService } from './register-http.service';
 
 describe('RegisterHttpService', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let httpHandler: HttpHandler;
   let httpClient: HttpClient;
   let registerHttpService: RegisterHttpService;
