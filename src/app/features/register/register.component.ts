@@ -15,7 +15,7 @@ const { required, minLength, maxLength, pattern } = Validators;
 })
 export class RegisterComponent implements OnDestroy {
   public errorMessages = errorMessages;
-  loginFail = '';
+  registerFail = '';
   private subscription$: Subscription | null = null;
 
   constructor(
@@ -64,9 +64,9 @@ export class RegisterComponent implements OnDestroy {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         error: (error: any) => {
           if (error.message.indexOf('409 Conflict')) {
-            this.loginFail = 'email exists';
+            this.registerFail = 'email exists';
           } else {
-            this.loginFail = 'something is wrong';
+            this.registerFail = 'something is wrong';
           }
         },
       });
