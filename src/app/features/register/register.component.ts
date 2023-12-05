@@ -27,7 +27,7 @@ export class RegisterComponent implements OnDestroy {
     required,
     minLength(length.email.min),
     maxLength(length.email.max),
-    pattern(valid.email),
+    Validators.email,
   ]);
   public password = new FormControl<string | null>('', [
     required,
@@ -44,8 +44,8 @@ export class RegisterComponent implements OnDestroy {
     const email = this.email.value || '';
     const password = this.password.value || '';
 
-    const regex = /[@.]/gi;
-    const username = email.replace(regex, '-');
+    const regex = /[@.]/gi; // remove
+    const username = email.replace(regex, '-'); // remove
 
     const form = {
       email,
