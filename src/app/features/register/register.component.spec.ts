@@ -80,6 +80,6 @@ describe('RegisterComponent', () => {
     );
     component.onSubmit();
 
-    expect(component.loginFail).toBeTruthy();
+    expect(component.registerFail).toBeTruthy();
   });
 });
