@@ -4,69 +4,65 @@ import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 
 import { length, valid, errorMessages } from '../../shared/constants';
-import { RegisterHttpService } from './register-http.service';
+import { LoginHttpService } from '../../core/http/login-http.service';
 
 const { required, minLength, maxLength, pattern } = Validators;
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class RegisterComponent implements OnDestroy {
+export class LoginComponent implements OnDestroy {
   public errorMessages = errorMessages;
-  registerFail = '';
+  public loginFail = '';
+  public failCounts = 0;
   private subscription$: Subscription | null = null;
 
   constructor(
-    private registerHttpService: RegisterHttpService,
+    private loginHttpService: LoginHttpService,
     private router: Router
   ) {}
 
-  public email = new FormControl<string | null>('', [
+  public login = new FormControl<string | null>('', [
     required,
     minLength(length.email.min),
     maxLength(length.email.max),
-    Validators.email,
   ]);
   public password = new FormControl<string | null>('', [
     required,
     minLength(length.password.min),
     pattern(valid.password),
   ]);
-  public confirmPassword = new FormControl<string | null>('', [required]);
 
   ngOnDestroy(): void {
     this.subscription$?.unsubscribe();
   }
 
   public onSubmit(): void {
-    const email = this.email.value || '';
+    const login = this.login.value || '';
     const password = this.password.value || '';
 
-    const regex = /[@.]/gi; // remove
-    const username = email.replace(regex, '-'); // remove
-
     const form = {
-      email,
-      username,
+      login,
       password,
-      role: 'user',
     };
 
-    this.registerHttpService
-      .register(form)
+    this.loginHttpService
+      .login(form)
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         error: (error: any) => {
-          if (error.message.indexOf('409 Conflict')) {
-            this.registerFail = 'email exists';
-          } else {
-            this.registerFail = 'something is wrong';
+          console.error(error);
+          this.loginFail = 'login fails';
+          this.failCounts += 1;
+
+          if (this.failCounts === 3) {
+            // TODO
           }
         },
       });

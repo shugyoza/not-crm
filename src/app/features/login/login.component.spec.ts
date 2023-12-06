@@ -4,32 +4,32 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
-import { RegisterComponent } from './register.component';
+import { LoginComponent } from './login.component';
 import { ErrorsMessagePipe } from 'src/app/shared/pipes/errors-message.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RegisterHttpService } from './register-http.service';
+import { LoginHttpService } from '../../core/http/login-http.service';
 
 describe('RegisterComponent', () => {
-  let component: RegisterComponent;
-  let fixture: ComponentFixture<RegisterComponent>;
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
   let router: Router;
-  let registerHttpService: RegisterHttpService;
+  let loginHttpService: LoginHttpService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RegisterComponent, ErrorsMessagePipe],
+      declarations: [LoginComponent, ErrorsMessagePipe],
       imports: [SharedModule],
       providers: [
-        { provide: RegisterHttpService, useClass: RegisterHttpService },
+        { provide: LoginHttpService, useClass: LoginHttpService },
         { provide: Router, useClass: Router },
         HttpClient,
         HttpHandler,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    registerHttpService = TestBed.inject(RegisterHttpService);
+    loginHttpService = TestBed.inject(LoginHttpService);
     router = TestBed.inject(Router);
-    fixture = TestBed.createComponent(RegisterComponent);
+    fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -38,16 +38,16 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call RegisterHttpService method on register and redirect to /login on success response', async () => {
+  it('should call LoginHttpService method on login and redirect to /profile on success response', async () => {
     const email = 'username@email.com';
     const password = 'somerandompassword';
-    component.email.setValue(email);
+    component.login.setValue(email);
     component.password.setValue(password);
 
-    spyOn(registerHttpService, 'register').and.returnValues(
+    spyOn(loginHttpService, 'login').and.returnValues(
       of({
         ok: true,
-        status: 201,
+        status: 200,
         message: 'account created',
         result: { id: 1 },
       })
@@ -56,30 +56,28 @@ describe('RegisterComponent', () => {
 
     component.onSubmit();
 
-    expect(registerHttpService.register).toHaveBeenCalledWith({
-      email,
+    expect(loginHttpService.login).toHaveBeenCalledWith({
+      login: email,
       password,
-      username: 'username-email-com',
-      role: 'user',
     });
-    expect(router.navigate).toHaveBeenCalledWith(['/login']);
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 
-  it('should call RegisterHttpService method on register and show email exists message when getting 409 Conflict error response', () => {
+  it('should call LoginHttpService method on register and show email exists message when getting 409 Conflict error response', () => {
     const email = 'username@email.com';
     const password = 'somerandompassword';
-    component.email.setValue(email);
+    component.login.setValue(email);
     component.password.setValue(password);
 
-    spyOn(registerHttpService, 'register').and.returnValue(
+    spyOn(loginHttpService, 'login').and.returnValue(
       throwError(
         new Error(
-          'Http failure response for http://localhost:4200/api/v1/account/register: 409 Conflict'
+          'Http failure response for http://localhost:4200/api/v1/account/login: 409 Conflict'
         )
       )
     );
     component.onSubmit();
 
-    expect(component.registerFail).toBeTruthy();
+    expect(component.loginFail).toBeTruthy();
   });
 });

@@ -1,0 +1,39 @@
+span.error {
+  color: red;
+}
+
+span.ok {
+  color: green;
+}
+
+div.label-error-wrapper {
+  height: 2.5em;
+}
+
+fieldset {
+  padding: 2.5em;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  border: none;
+}
+
+input {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  height: 2em;
+}
+
+.label-input {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+}

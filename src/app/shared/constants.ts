@@ -5,11 +5,11 @@ export const length = {
   local.address@complete.domain */
   email: {
     min: 6, // i.e.: 'a@b.ca'
-    max: 255, // Longest email add is 320 and it is silly.
+    max: 254, // Longest email add is 320 and it is silly.
   },
   username: {
     min: 6, // google's enforced minimum length, although its use case (big users pool) very likely won't apply to app with small users pool
-    max: 255,
+    max: 254,
   },
   password: {
     min: 8, // common standard
@@ -17,24 +17,26 @@ export const length = {
 };
 
 export const valid = {
-  username: /^[a-zA-Z0-9][-a-zA-Z0-9_]*\$?$/,
-  email:
-    // eslint-disable-next-line no-useless-escape
-    /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+  username: /^[a-z0-9][-a-z0-9_]*\$?$/,
   password: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
 };
 
 export const errorMessages = {
+  login: {
+    required: 'Required field',
+    minlength: 'Input is too short',
+    maxlength: `"Input is too long"`,
+  },
   email: {
     required: 'Required field',
     minlength: "Email format must be valid, e.g: 'a@b.ca'",
-    maxLength: `"Email format must be valid, e.g: 'not-this_long@email.com'"`,
+    maxlength: `"Email format must be valid, e.g: 'not-this_long@email.com'"`,
     pattern: "Email format must be valid, e.g: 'ab.cd@email.com'",
   },
   username: {
     required: 'Required field',
     minlength: `Username must have a minimum of ${length.username.min} characters`,
-    maxLength: `Username must have a maximum of ${length.username.max} characters`,
+    maxlength: `Username must have a maximum of ${length.username.max} characters`,
     pattern:
       "Username can only contain number, dash (-) underscore (-), lowercased letter, (NO CAPITAL letter), e.g: 'user_name-2'",
   },
