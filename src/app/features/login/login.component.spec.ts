@@ -60,7 +60,7 @@ describe('RegisterComponent', () => {
       login: email,
       password,
     });
-    expect(router.navigate).toHaveBeenCalledWith(['/profile']);
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 
   it('should call LoginHttpService method on register and show email exists message when getting 409 Conflict error response', () => {
