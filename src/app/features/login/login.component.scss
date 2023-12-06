@@ -36,10 +36,4 @@ input {
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
-} 
-
-:host-context(.mobile) {
-  .something {
-    font-style: italic;
-  }
 }
