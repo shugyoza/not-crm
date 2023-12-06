@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { RegisterComponent } from './features/register/register.component';
+import { LoginComponent } from './features/login/login.component';
 
 const routes: Routes = [
   {
@@ -13,9 +14,9 @@ const routes: Routes = [
       ),
   },
   {
-    // temporary, will be replaced when login module has been developed
     path: 'login',
-    redirectTo: '/',
+    component: LoginComponent,
+    loadChildren: () => import('./features/login/login.module').then((m) => m.LoginModule),
   },
 ];
 

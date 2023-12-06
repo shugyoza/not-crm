@@ -1,0 +1,49 @@
+<form (ngSubmit)="onSubmit()" id="registerForm">
+  <fieldset>
+    <legend>Login Form</legend>
+    <div class="label-input">
+      <input
+        id="input-login"
+        type="text"
+        [formControl]="login"
+        placeholder="e.g: user@email.com OR username"
+        required
+      />
+      <div class="label-error-wrapper">
+        <label class="something" id="label-email" for="input-email"> Email / Username. </label>
+        <span role="alert" class="error">
+          {{ login.errors | errorsMessagePipe: errorMessages.login }}
+        </span>
+      </div>
+    </div>
+
+    <div class="label-input">
+      <input
+        id="input-password"
+        type="password"
+        [formControl]="password"
+        placeholder="e.g: Password123"
+        required
+      />
+      <div class="label-error-wrapper">
+        <label id="label-password" for="input-password"> Password. </label>
+        <span role="alert" class="error">
+          {{ password.errors | errorsMessagePipe: errorMessages.password }}
+        </span>
+      </div>
+    </div>
+
+    <div>
+      <button
+        type="submit"
+        [disabled]="
+          login.errors ||
+          password.errors
+        "
+      >
+        Login
+      </button>
+      <span class="error">{{ loginFail }}</span>
+    </div>
+  </fieldset>
+</form>
