@@ -24,7 +24,7 @@ export const valid = {
 export const errorMessages = {
   login: {
     required: 'Required field',
-    minlength: "Input is too short",
+    minlength: 'Input is too short',
     maxlength: `"Input is too long"`,
   },
   email: {

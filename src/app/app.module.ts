@@ -21,7 +21,7 @@ import { LoginModule } from './features/login/login.module';
     AppRoutingModule,
     SharedModule,
     RegisterModule,
-    LoginModule
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,7 +7,7 @@ import { of, throwError } from 'rxjs';
 import { LoginComponent } from './login.component';
 import { ErrorsMessagePipe } from 'src/app/shared/pipes/errors-message.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { LoginHttpService } from '../../core/http/login-http.service'
+import { LoginHttpService } from '../../core/http/login-http.service';
 
 describe('RegisterComponent', () => {
   let component: LoginComponent;

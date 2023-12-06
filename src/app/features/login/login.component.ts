@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 
 import { length, valid, errorMessages } from '../../shared/constants';
-import { LoginHttpService } from '../../core/http/login-http.service'
+import { LoginHttpService } from '../../core/http/login-http.service';
 
 const { required, minLength, maxLength, pattern } = Validators;
 
@@ -57,13 +57,13 @@ export class LoginComponent implements OnDestroy {
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         error: (error: any) => {
-            console.error(error);
-            this.loginFail = 'login fails';
-            this.failCounts += 1;
+          console.error(error);
+          this.loginFail = 'login fails';
+          this.failCounts += 1;
 
-            if (this.failCounts === 3) {
-              // TODO
-            }
+          if (this.failCounts === 3) {
+            // TODO
+          }
         },
       });
   }
