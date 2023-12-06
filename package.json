@@ -13,7 +13,8 @@
     "cci:install": "sh scripts/cci-npm-install.sh",
     "cci:test": "sh scripts/cci-npm-test.sh",
     "ci:test": "npx ng test --project not-crm --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
-    "lint": "ng lint",
+    "lint": "ng lint && npx prettier . --check",
+    "prettier:fix": "npx prettier . --write",
     "github/super-linter": "sh scripts/github-super-linter.sh",
     "ci:build:prod": "ng build —prod —output-hashing name"
   },
