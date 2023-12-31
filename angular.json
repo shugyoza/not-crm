@@ -57,15 +57,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "notCrm:build",
-            "proxyConfig": "src/proxy.conf.json"
+            "proxyConfig": "src/proxy.conf.json",
+            "buildTarget": "notCrm:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "not-crm:build:production"
+              "buildTarget": "not-crm:build:production"
             },
             "development": {
-              "browserTarget": "not-crm:build:development"
+              "buildTarget": "not-crm:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "not-crm:build"
+            "buildTarget": "not-crm:build"
           }
         },
         "test": {
