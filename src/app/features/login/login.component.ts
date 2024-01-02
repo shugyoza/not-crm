@@ -26,13 +26,8 @@ export class LoginComponent implements OnDestroy {
   public showNextButton = true;
 
   private subscription$: Subscription | null = null;
-  // private loginHttpService!: LoginHttpService; // = inject(LoginHttpService);
-  // private router!: Router; // = inject(Router);
-
-  constructor(
-    private loginHttpService: LoginHttpService,
-    private router: Router
-  ) {}
+  private loginHttpService!: LoginHttpService; // = inject(LoginHttpService);
+  private router!: Router; // = inject(Router);
 
   public login = new FormControl<string | null>('', [
     required,
