@@ -1,21 +1,11 @@
-span.error {
-  color: red;
+@use '../../shared/styles/colors' as colors;
+
+.error {
+  color: colors.$red;
 }
 
-span.ok {
-  color: green;
-}
-
-div.label-error-wrapper {
-  height: 2.5em;
-}
-
-fieldset {
-  padding: 2.5em;
-  width: 55%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1em;
+.ok {
+  color: colors.$accessible-dark-green;
 }
 
 form {
@@ -24,16 +14,101 @@ form {
   border: none;
 }
 
-input {
-  width: 100%;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  height: 2em;
-}
-
-.label-input {
+fieldset {
+  width: fit-content;
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
+  border: 1px solid grey;
+}
+
+input.field {
+  all: unset;
+  width: 100%;
+  padding: 0.3em;
+
+  border: 1px solid colors.$grey;
+  border-radius: 0.3em;
+
+  &:focus {
+    background-color: colors.$white-cultured;
+  }
+}
+
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+button {
+  all: unset;
+  box-sizing: border-box; /* important so div won't spill out of the width of the enclosing fieldset */
+
+  background-color: colors.$dark-blue;
+  border: 1px solid colors.$dark-blue;
+  border-radius: 5px;
+  padding: 0.3em;
+  color: colors.$white-cultured;
+  text-align: center;
+
+  &:disabled {
+    background-color: colors.$silver;
+    border: 1px solid colors.$grey;
+    color: colors.$grey;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 80%;
+  }
+}
+
+button#show-password {
+  background-color: orangered;
+  border: 1px solid orangered;
+}
+
+div.field-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+
+  padding: 0.5em;
+  width: 100%;
+}
+
+label {
+  color: colors.$grey;
+}
+
+.red-border {
+  border-color: colors.$red;
+}
+
+.green-border {
+  border-color: colors.$default-dark-green;
+}
+
+@media (max-width: 768px) {
+  fieldset {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  fieldset {
+    width: 75%;
+  }
+}
+
+@media (min-width: 1025px) {
+  fieldset {
+    width: 60%;
+  }
 }
