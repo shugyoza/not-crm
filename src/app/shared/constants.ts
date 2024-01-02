@@ -27,7 +27,7 @@ export const errorMessages = {
     required: 'required',
     minlength: `minimum ${length.username.min} characters`,
     maxlength: `maximum ${length.username.max} characters`,
-    email: 'must be a valid email format'
+    email: 'must be a valid email format',
   },
   email: {
     required: 'required',

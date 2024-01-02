@@ -15,8 +15,7 @@ const { required, minLength, maxLength, pattern, email } = Validators;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule]
-  
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
 })
 export class LoginComponent implements OnDestroy {
   public errorMessages = errorMessages;

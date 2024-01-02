@@ -1,11 +1,7 @@
 <form (ngSubmit)="onSubmit()">
-
   <fieldset>
-
     <section>
-      <label for="input-login">
-        Email
-      </label>
+      <label for="input-login"> Email </label>
 
       <div class="field-button">
         <input
@@ -15,24 +11,41 @@
           [formControl]="login"
           (keyup)="onLoginUpdate()"
           required
-          [style.border-color]="login.dirty && login.errors ? 'red' : !login.errors ? 'green' : 'grey'"
+          [style.border-color]="
+            login.dirty && login.errors
+              ? 'red'
+              : !login.errors
+              ? 'green'
+              : 'grey'
+          "
         />
 
-        <button *ngIf="login.errors || showNextButton" type="button" (click)="toggleNext()" [disabled]="login.errors">Next</button>
+        <button
+          *ngIf="login.errors || showNextButton"
+          type="button"
+          (click)="toggleNext()"
+          [disabled]="login.errors"
+        >
+          Next
+        </button>
       </div>
     </section>
 
-    <ul *ngIf="login.errors || showNextButton" role="group" class='error'>
-      <li [class.ok]="!login.errors?.required">{{ errorMessages.login.required }}</li>
-      <li [class.ok]="!login.errors?.required && !login.errors?.minlength">{{ errorMessages.login.minlength }}</li>
-      <li [class.ok]="!login.errors?.required && !login.errors?.email">{{ errorMessages.login.email }}</li>
+    <ul *ngIf="login.errors || showNextButton" role="group" class="error">
+      <li [class.ok]="!login.errors?.required">
+        {{ errorMessages.login.required }}
+      </li>
+      <li [class.ok]="!login.errors?.required && !login.errors?.minlength">
+        {{ errorMessages.login.minlength }}
+      </li>
+      <li [class.ok]="!login.errors?.required && !login.errors?.email">
+        {{ errorMessages.login.email }}
+      </li>
     </ul>
 
     <ng-container *ngIf="!login.errors && !showNextButton">
       <section>
-        <label for="input-password">
-          Password
-        </label>  
+        <label for="input-password"> Password </label>
         <div class="field-button">
           <input
             class="field"
@@ -41,7 +54,13 @@
             [formControl]="password"
             placeholder="Password"
             required
-            [style.border-color]="password.dirty && password.errors ? 'red' : !password.errors ? 'green' : 'grey'"
+            [style.border-color]="
+              password.dirty && password.errors
+                ? 'red'
+                : !password.errors
+                ? 'green'
+                : 'grey'
+            "
           />
           <button id="show-password" type="button" (click)="togglePassword()">
             {{ showPassword ? 'Hide' : 'Show' }}
@@ -49,10 +68,18 @@
         </div>
         <a href="#">Forgot password?</a>
       </section>
-      <ul *ngIf="password.errors" class='error'>
-        <li [class.ok]="!password.errors.required">{{ errorMessages.password.required }}</li>
-        <li [class.ok]="!password.errors.required && !password.errors.minlength">{{ errorMessages.password.minlength }}</li>
-        <li [class.ok]="!password.errors.required && !password.errors.pattern">{{ errorMessages.password.pattern }}</li>
+      <ul *ngIf="password.errors" class="error">
+        <li [class.ok]="!password.errors.required">
+          {{ errorMessages.password.required }}
+        </li>
+        <li
+          [class.ok]="!password.errors.required && !password.errors.minlength"
+        >
+          {{ errorMessages.password.minlength }}
+        </li>
+        <li [class.ok]="!password.errors.required && !password.errors.pattern">
+          {{ errorMessages.password.pattern }}
+        </li>
       </ul>
     </ng-container>
 
@@ -64,6 +91,5 @@
       </span>
       <span class="error" role="alert">{{ loginFail }}</span>
     </section>
-
   </fieldset>
 </form>

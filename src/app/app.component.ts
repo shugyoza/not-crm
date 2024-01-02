@@ -7,7 +7,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterOutlet]
+  imports: [CommonModule, RouterOutlet],
 })
 export class AppComponent {
   title = 'not-crm';
