@@ -1,11 +1,11 @@
 @use '../../shared/styles/colors' as colors;
 
 .error {
-  color: colors.$red;
+  color: red;
 }
 
 .ok {
-  color: colors.$accessible-dark-green;
+  color: green;
 }
 
 form {
