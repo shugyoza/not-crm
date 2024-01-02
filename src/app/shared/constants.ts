@@ -13,6 +13,7 @@ export const length = {
   },
   password: {
     min: 8, // common standard
+    max: 254,
   },
 };
 
@@ -23,30 +24,31 @@ export const valid = {
 
 export const errorMessages = {
   login: {
-    required: 'Required field',
-    minlength: 'Input is too short',
-    maxlength: `"Input is too long"`,
+    required: 'required',
+    minlength: `minimum ${length.username.min} characters`,
+    maxlength: `maximum ${length.username.max} characters`,
+    email: 'must be a valid email format'
   },
   email: {
-    required: 'Required field',
-    minlength: "Email format must be valid, e.g: 'a@b.ca'",
-    maxlength: `"Email format must be valid, e.g: 'not-this_long@email.com'"`,
-    pattern: "Email format must be valid, e.g: 'ab.cd@email.com'",
+    required: 'required',
+    minlength: `minimum ${length.email.min} characters`,
+    maxlength: `maximum ${length.email.max} characters`,
+    pattern: "format must be valid, e.g: 'ab.cd@email.com'",
   },
   username: {
-    required: 'Required field',
-    minlength: `Username must have a minimum of ${length.username.min} characters`,
-    maxlength: `Username must have a maximum of ${length.username.max} characters`,
+    required: 'required',
+    minlength: `minimum ${length.username.min} characters`,
+    maxlength: `maximum ${length.username.max} characters`,
     pattern:
       "Username can only contain number, dash (-) underscore (-), lowercased letter, (NO CAPITAL letter), e.g: 'user_name-2'",
   },
   password: {
-    required: 'Required field',
-    minlength: `Password must have a minimum of ${length.password.min} characters`,
-    pattern:
-      'Password must contain at least one number, one capital letter, and one lowercase letter, e.g.: paSsword123',
+    required: 'required',
+    minlength: `minimum ${length.password.min} characters`,
+    maxlength: `maximum ${length.password.max} characters`,
+    pattern: `must contain at least a number, a capital letter, and a lowercase letter`,
   },
   confirmPassword: {
-    required: 'Required field',
+    required: 'required',
   },
 };
