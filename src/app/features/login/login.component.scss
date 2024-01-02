@@ -26,6 +26,7 @@ input.field {
   padding: 0.3em;
   border: 1px solid colors.$grey;
   border-radius: 0.3em;
+
   &:focus {
     background-color: colors.$white-cultured;
   }
@@ -45,6 +46,7 @@ button {
   padding: 0.3em;
   color: colors.$white-cultured;
   text-align: center;
+  
   &:disabled {
     background-color: colors.$silver;
     border: 1px solid colors.$grey;
