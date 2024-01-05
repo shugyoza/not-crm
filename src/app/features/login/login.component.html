@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()">
+<form>
   <fieldset>
     <section>
       <label for="input-login"> Email </label>
@@ -17,7 +17,7 @@
               : !login.errors
               ? 'green'
               : 'grey'
-          "
+          "      
         />
 
         <button
@@ -52,7 +52,6 @@
             id="input-password"
             type="{{ showPassword ? 'text' : 'password' }}"
             [formControl]="password"
-            placeholder="Password"
             required
             [style.border-color]="
               password.dirty && password.errors
@@ -66,7 +65,7 @@
             {{ showPassword ? 'Hide' : 'Show' }}
           </button>
         </div>
-        <a href="#">Forgot password?</a>
+
       </section>
       <ul *ngIf="password.errors" class="error">
         <li [class.ok]="!password.errors.required">
@@ -83,13 +82,17 @@
       </ul>
     </ng-container>
 
+    <span>
+      <input type="checkbox" id="remember-me" [formControl]="rememberMe" />
+      <label for="remember-me">Remember me</label>
+    </span>
+
     <section *ngIf="!login.errors && !password.errors">
-      <button type="submit">Login</button>
-      <span>
-        <input type="checkbox" id="remember-me" [formControl]="rememberMe" />
-        <label for="remember-me">Remember me</label>
+      <button type="submit" (click)="onSubmit()">Login</button>
+      <span class="error" role="alert">
+        {{ loginFail }} 
+        <a href="#">Forgot password?</a>
       </span>
-      <span class="error" role="alert">{{ loginFail }}</span>
-    </section>
+    </section>  
   </fieldset>
 </form>
