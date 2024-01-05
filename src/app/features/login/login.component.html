@@ -87,7 +87,7 @@
     </span>
 
     <section *ngIf="!login.errors && !password.errors">
-      <button type="submit" (click)="onSubmit()">Login</button>
+      <button type="button" (click)="onSubmit()">Login</button>
       <span class="error" role="alert">
         {{ loginFail }}
         <a href="#">Forgot password?</a>
