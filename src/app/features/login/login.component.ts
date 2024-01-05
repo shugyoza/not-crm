@@ -1,5 +1,5 @@
 import { Component, OnDestroy, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 
@@ -15,7 +15,8 @@ const { required, minLength, maxLength, pattern, email } = Validators;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  providers: [LoginHttpService]
 })
 export class LoginComponent implements OnDestroy {
   public errorMessages = errorMessages;
@@ -26,8 +27,13 @@ export class LoginComponent implements OnDestroy {
   public showNextButton = true;
 
   private subscription$: Subscription | null = null;
-  private loginHttpService!: LoginHttpService; // = inject(LoginHttpService);
-  private router!: Router; // = inject(Router);
+  // private loginHttpService: LoginHttpService = inject(LoginHttpService);
+  // private router: Router = inject(Router);
+
+  constructor(
+    private loginHttpService: LoginHttpService,
+    private router: Router
+  ) {}
 
   public login = new FormControl<string | null>('', [
     required,
@@ -62,6 +68,17 @@ export class LoginComponent implements OnDestroy {
   public onLoginUpdate() {
     if (this.login.errors) {
       this.showNextButton = true;
+      this.password.reset();
+    }
+
+    if ((event as KeyboardEvent).code === 'Enter') {
+      this.toggleNext();
+    }
+  }
+
+  public onPasswordUpdate() {
+    if ((event as KeyboardEvent).code === 'Enter') {
+      this.toggleNext();
     }
   }
 
@@ -90,7 +107,7 @@ export class LoginComponent implements OnDestroy {
           console.error(error);
 
           // check if error due to invalid user's input?
-          this.loginFail = 'Invalid login or password';
+          this.loginFail = 'Invalid login or password!';
           this.failCounts += 1;
 
           if (this.failCounts === 3) {
