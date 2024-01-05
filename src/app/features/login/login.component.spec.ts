@@ -36,7 +36,7 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should call LoginHttpService method on login and redirect to /profile on success response', () => {
     const email = 'username@email.com';
     const password = 'somerandompassword';

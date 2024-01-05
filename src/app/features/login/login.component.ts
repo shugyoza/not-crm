@@ -1,5 +1,10 @@
 import { Component, OnDestroy, inject } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 
@@ -15,7 +20,7 @@ const { required, minLength, maxLength, pattern, email } = Validators;
   styleUrls: ['./login.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  providers: [LoginHttpService]
+  providers: [LoginHttpService],
 })
 export class LoginComponent implements OnDestroy {
   public errorMessages = errorMessages;

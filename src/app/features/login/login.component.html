@@ -17,7 +17,7 @@
               : !login.errors
               ? 'green'
               : 'grey'
-          "      
+          "
         />
 
         <button
@@ -65,7 +65,6 @@
             {{ showPassword ? 'Hide' : 'Show' }}
           </button>
         </div>
-
       </section>
       <ul *ngIf="password.errors" class="error">
         <li [class.ok]="!password.errors.required">
@@ -90,9 +89,9 @@
     <section *ngIf="!login.errors && !password.errors">
       <button type="submit" (click)="onSubmit()">Login</button>
       <span class="error" role="alert">
-        {{ loginFail }} 
+        {{ loginFail }}
         <a href="#">Forgot password?</a>
       </span>
-    </section>  
+    </section>
   </fieldset>
 </form>
