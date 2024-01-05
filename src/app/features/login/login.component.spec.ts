@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHandler } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
 import { LoginComponent } from './login.component';
 import { ErrorsMessagePipe } from 'src/app/shared/pipes/errors-message.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginHttpService } from '../../core/http/login-http.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -15,9 +15,9 @@ describe('LoginComponent', () => {
   let router: Router;
   let loginHttpService: LoginHttpService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [ErrorsMessagePipe],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [],
       imports: [SharedModule, LoginComponent],
       providers: [
         { provide: LoginHttpService, useClass: LoginHttpService },
@@ -26,7 +26,8 @@ describe('LoginComponent', () => {
         HttpHandler,
       ],
       schemas: [NO_ERRORS_SCHEMA],
-    });
+    }).compileComponents();
+
     loginHttpService = TestBed.inject(LoginHttpService);
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(LoginComponent);
@@ -37,8 +38,8 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should call LoginHttpService method on login and redirect to /profile on success response', async () => {
+  
+  it('should call LoginHttpService method on login and redirect to /profile on success response', () => {
     const email = 'username@email.com';
     const password = 'somerandompassword';
     component.login.setValue(email);
@@ -56,11 +57,11 @@ describe('LoginComponent', () => {
 
     component.onSubmit();
 
-    // expect(loginHttpService.login).toHaveBeenCalledWith({
-    //   login: email,
-    //   password,
-    // });
-    // expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(loginHttpService.login).toHaveBeenCalledWith({
+      login: email,
+      password,
+    });
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 
   it('should call LoginHttpService method on login and show email exists message when getting 409 Conflict error response', () => {
@@ -78,6 +79,6 @@ describe('LoginComponent', () => {
     );
     component.onSubmit();
 
-    // expect(component.loginFail).toBeTruthy();
+    expect(component.loginFail).toBeTruthy();
   });
 });
