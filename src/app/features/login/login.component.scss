@@ -19,15 +19,14 @@ fieldset {
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
-  border: 1px solid grey;
+  border: 1px solid colors.$silver;
 }
 
 input.field {
   all: unset;
   width: 100%;
   padding: 0.3em;
-  border: 1px solid colors.$grey;
-  border-radius: 0.3em;
+  border-bottom: 1px solid colors.$grey;
 
   &:focus {
     background-color: colors.$white-cultured;
@@ -44,14 +43,13 @@ button {
   box-sizing: border-box; /* important so div will not spill out of the width of the enclosing fieldset */
   background-color: colors.$dark-blue;
   border: 1px solid colors.$dark-blue;
-  border-radius: 5px;
   padding: 0.3em;
   color: colors.$white-cultured;
   text-align: center;
 
   &:disabled {
     background-color: colors.$silver;
-    border: 1px solid colors.$grey;
+    border: 1px solid colors.$silver;
     color: colors.$grey;
   }
 
@@ -75,8 +73,8 @@ div.field-button {
 section {
   display: flex;
   flex-direction: column;
-  row-gap: 0.5em;
-  padding: 0.5em;
+  row-gap: 0.3em;
+  padding: 0.3em;
   width: 100%;
 }
 
