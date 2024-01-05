@@ -5,9 +5,8 @@ import { of, throwError } from 'rxjs';
 
 import { LoginComponent } from './login.component';
 import { ErrorsMessagePipe } from 'src/app/shared/pipes/errors-message.pipe';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { LoginHttpService } from '../../core/http/login-http.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -18,12 +17,11 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [],
-      imports: [SharedModule, LoginComponent],
+      imports: [LoginComponent],
       providers: [
         { provide: LoginHttpService, useClass: LoginHttpService },
         { provide: Router, useClass: Router },
-        HttpClient,
-        HttpHandler,
+        provideHttpClient(),
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
