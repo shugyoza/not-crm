@@ -6,7 +6,6 @@ import { Subscription, take } from 'rxjs';
 import { length, errorMessages, valid } from '../../shared/constants';
 import { LoginHttpService } from '../../core/http/login-http.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 
 const { required, minLength, maxLength, pattern, email } = Validators;
 
