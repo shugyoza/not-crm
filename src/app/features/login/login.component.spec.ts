@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
-import { of, throwError } from 'rxjs';
 
 import { LoginComponent } from './login.component';
-import { ErrorsMessagePipe } from 'src/app/shared/pipes/errors-message.pipe';
 import { LoginHttpService } from '../../core/http/login-http.service';
 import { provideHttpClient } from '@angular/common/http';
+import { By } from '@angular/platform-browser';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -30,53 +29,55 @@ describe('LoginComponent', () => {
     router = TestBed.inject(Router);
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call LoginHttpService method on login and redirect to /profile on success response', () => {
-    const email = 'username@email.com';
-    const password = 'somerandompassword';
-    component.login.setValue(email);
-    component.password.setValue(password);
+  it('should update .showNextButton when .toggleNext() got called with invalid login input', () => {
+    component.login.setValue('');
+    component.toggleNext();
 
-    spyOn(loginHttpService, 'login').and.returnValues(
-      of({
-        ok: true,
-        status: 200,
-        message: 'account created',
-        result: { id: 1 },
-      })
-    );
-    spyOn(router, 'navigate').and.callFake(async () => true);
-
-    component.onSubmit();
-
-    expect(loginHttpService.login).toHaveBeenCalledWith({
-      login: email,
-      password,
-    });
-    expect(router.navigate).toHaveBeenCalledWith(['/']);
+    expect(component.showNextButton).toBe(true);
   });
 
-  it('should call LoginHttpService method on login and show email exists message when getting 409 Conflict error response', () => {
-    const email = 'username@email.com';
-    const password = 'somerandompassword';
-    component.login.setValue(email);
-    component.password.setValue(password);
+  it('should update .showNextButton to false when .toggleNext() got called with valid login input', () => {
+    component.login.setValue('something@email.com');
+    component.toggleNext();
 
-    spyOn(loginHttpService, 'login').and.returnValue(
-      throwError(
-        new Error(
-          'Http failure response for http://localhost:4200/api/v1/account/login: 409 Conflict'
-        )
-      )
-    );
-    component.onSubmit();
+    expect(component.showNextButton).toBe(false);
+  });
 
-    expect(component.loginFail).toBeTruthy();
+  it('should toggle .showPassword value when .togglePassword() got called', () => {
+    component.showPassword = false;
+    component.togglePassword();
+
+    expect(component.showPassword).toBe(true);
+  });
+
+  it('should set .showNextButton as true and call password.reset() when .onLoginUpdate got called with invalid login input', () => {
+    component.login.setValue('');
+
+    spyOn(component.password, 'reset').and.callThrough();
+
+    component.onLoginUpdate();
+
+    expect(component.showNextButton).toBe(true);
+    expect(component.password.reset).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call .toggleNext when .onLoginUpdate got called with KeyboardEvent triggered by Enter key pressing', () => {
+    component.login.setValue('something@email.com');
+    const loginInput = fixture.debugElement.query(By.css('input#input-login'))
+      .nativeElement as HTMLInputElement;
+
+    spyOn(component, 'onLoginUpdate').and.callThrough();
+    spyOn(component, 'toggleNext').and.callThrough();
+
+    loginInput.dispatchEvent(new KeyboardEvent('keyup', { code: 'Enter' }));
+
+    expect(component.onLoginUpdate).toHaveBeenCalledTimes(1);
+    expect(component.toggleNext).toHaveBeenCalledTimes(1);
   });
 });

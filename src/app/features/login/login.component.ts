@@ -1,9 +1,5 @@
 import { Component, OnDestroy, inject } from '@angular/core';
-import {
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 
@@ -19,7 +15,7 @@ const { required, minLength, maxLength, pattern, email } = Validators;
   styleUrls: ['./login.component.scss'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  providers: [LoginHttpService]
+  providers: [LoginHttpService],
 })
 export class LoginComponent implements OnDestroy {
   public errorMessages = errorMessages;
@@ -30,13 +26,13 @@ export class LoginComponent implements OnDestroy {
   public showNextButton = true;
 
   private subscription$: Subscription | null = null;
-  private loginHttpService: LoginHttpService = inject(LoginHttpService);
-  private router: Router = inject(Router);
+  // private loginHttpService: LoginHttpService = inject(LoginHttpService);
+  // private router: Router = inject(Router);
 
-  // constructor(
-  //   private loginHttpService: LoginHttpService,
-  //   private router: Router
-  // ) {}
+  constructor(
+    private loginHttpService: LoginHttpService,
+    private router: Router
+  ) {}
 
   public login = new FormControl<string | null>('', [
     required,
@@ -79,15 +75,9 @@ export class LoginComponent implements OnDestroy {
     }
   }
 
-  public onPasswordUpdate() {
-    if ((event as KeyboardEvent).code === 'Enter') {
-      this.toggleNext();
-    }
-  }
-
   public onSubmit(): void {
-    const login = this.login.value || '';
-    const password = this.password.value || '';
+    const login = this.login.value ?? '';
+    const password = this.password.value ?? '';
     // const rememberMe = this.rememberMe.value;
 
     const form = {
