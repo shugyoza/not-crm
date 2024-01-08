@@ -2,4 +2,36 @@
 * {
   font-size: min(4rem, max(0.875rem, 2vw));
   font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box; /* important so div won't spill out of the width of the enclosing fieldset */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.mobile-theme,
+.tablet-theme {
+  margin: 0 auto;
+}
+
+.desktop-theme {
+}
+
+@media screen and (min-width: 431px) {
+  .desktop {
+    width: 55%;
+    color: purple;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .mobile {
+    width: 100%;
+    color: turquoise;
+  }
 }

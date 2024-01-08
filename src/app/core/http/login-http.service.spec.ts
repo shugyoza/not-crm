@@ -1,12 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 import { LoginHttpService } from './login-http.service';
 
 describe('LoginHttpService', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let httpHandler: HttpHandler;
   let httpClient: HttpClient;
   let loginHttpService: LoginHttpService;
 
@@ -14,12 +12,10 @@ describe('LoginHttpService', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: LoginHttpService, useClass: LoginHttpService },
-        HttpClient,
-        HttpHandler,
+        provideHttpClient(),
       ],
       schemas: [NO_ERRORS_SCHEMA],
     });
-    httpHandler = TestBed.inject(HttpHandler);
     httpClient = TestBed.inject(HttpClient);
     loginHttpService = TestBed.inject(LoginHttpService);
   });

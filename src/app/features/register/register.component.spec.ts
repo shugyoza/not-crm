@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
 import { RegisterComponent } from './register.component';
@@ -22,8 +22,7 @@ describe('RegisterComponent', () => {
       providers: [
         { provide: RegisterHttpService, useClass: RegisterHttpService },
         { provide: Router, useClass: Router },
-        HttpClient,
-        HttpHandler,
+        provideHttpClient(),
       ],
       schemas: [NO_ERRORS_SCHEMA],
     });

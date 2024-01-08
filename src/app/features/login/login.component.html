@@ -1,45 +1,97 @@
-<form (ngSubmit)="onSubmit()" id="registerForm">
+<form>
   <fieldset>
-    <legend>Login Form</legend>
-    <div class="label-input">
-      <input
-        id="input-login"
-        type="text"
-        [formControl]="login"
-        placeholder="e.g: user@email.com OR username"
-        required
-      />
-      <div class="label-error-wrapper">
-        <label class="something" id="label-email" for="input-email">
-          Email / Username.
-        </label>
-        <span role="alert" class="error">
-          {{ login.errors | errorsMessagePipe: errorMessages.login }}
-        </span>
-      </div>
-    </div>
+    <section>
+      <label for="input-login"> Email </label>
 
-    <div class="label-input">
-      <input
-        id="input-password"
-        type="password"
-        [formControl]="password"
-        placeholder="e.g: Password123"
-        required
-      />
-      <div class="label-error-wrapper">
-        <label id="label-password" for="input-password"> Password. </label>
-        <span role="alert" class="error">
-          {{ password.errors | errorsMessagePipe: errorMessages.password }}
-        </span>
-      </div>
-    </div>
+      <div class="field-button">
+        <input
+          class="field"
+          id="input-login"
+          type="text"
+          [formControl]="login"
+          (keyup)="onLoginUpdate()"
+          required
+          [style.border-color]="
+            login.dirty && login.errors
+              ? 'red'
+              : !login.errors
+              ? 'green'
+              : 'grey'
+          "
+        />
 
-    <div>
-      <button type="submit" [disabled]="login.errors || password.errors">
-        Login
-      </button>
-      <span class="error">{{ loginFail }}</span>
-    </div>
+        <button
+          *ngIf="login.errors || showNextButton"
+          type="button"
+          (click)="toggleNext()"
+          [disabled]="login.errors"
+        >
+          Next
+        </button>
+      </div>
+    </section>
+
+    <ul *ngIf="login.errors || showNextButton" role="group" class="error">
+      <li [class.ok]="!login.errors?.required">
+        {{ errorMessages.login.required }}
+      </li>
+      <li [class.ok]="!login.errors?.required && !login.errors?.minlength">
+        {{ errorMessages.login.minlength }}
+      </li>
+      <li [class.ok]="!login.errors?.required && !login.errors?.email">
+        {{ errorMessages.login.email }}
+      </li>
+    </ul>
+
+    <ng-container *ngIf="!login.errors && !showNextButton">
+      <section>
+        <label for="input-password"> Password </label>
+        <div class="field-button">
+          <input
+            class="field"
+            id="input-password"
+            type="{{ showPassword ? 'text' : 'password' }}"
+            [formControl]="password"
+            required
+            [style.border-color]="
+              password.dirty && password.errors
+                ? 'red'
+                : !password.errors
+                ? 'green'
+                : 'grey'
+            "
+          />
+          <button id="show-password" type="button" (click)="togglePassword()">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+      </section>
+      <ul *ngIf="password.errors" class="error">
+        <li [class.ok]="!password.errors.required">
+          {{ errorMessages.password.required }}
+        </li>
+        <li
+          [class.ok]="!password.errors.required && !password.errors.minlength"
+        >
+          {{ errorMessages.password.minlength }}
+        </li>
+        <li [class.ok]="!password.errors.required && !password.errors.pattern">
+          {{ errorMessages.password.pattern }}
+        </li>
+      </ul>
+    </ng-container>
+
+    <span>
+      <input type="checkbox" id="remember-me" [formControl]="rememberMe" />
+      <label for="remember-me">Remember me</label>
+    </span>
+
+    <section *ngIf="!login.errors && !password.errors">
+      <button type="button" (click)="onSubmit()">Login</button>
+      <span class="error" role="alert">
+        {{ loginFail }}
+        <a href="#">Forgot password?</a>
+      </span>
+    </section>
   </fieldset>
 </form>
